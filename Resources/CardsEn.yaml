@@ -5,7 +5,7 @@ Dayuu:
     |For each <sprite="ManaSprite" name="W"><sprite="ManaSprite" name="U"><sprite="ManaSprite" name="B"><sprite="ManaSprite" name="R"><sprite="ManaSprite" name="G"><sprite="ManaSprite" name="C"><sprite="ManaSprite" name="P"> spent|: Defeat each enemy with {Value1} or less life.
     |When drawn|: Gain {Mana}.
   Name: Dayuu
-  FlavorText: \":skull:\"
+  FlavorText: ":skull:"
 DayuuFriend:
   Description: '{FriendP}Apply {Value1} |Temporary Firepower Down| to each enemy {Value1} times.'
   UpgradedDescription: '{FriendP}Apply {Value1} |Temporary Firepower Down| to each enemy {Value1} times.'
@@ -14,4 +14,4 @@ DayuuFriend:
   ExtraDescription2: "{FriendU}If any enemy's life is less than 33%, defeat it. Then, apply {Value2} |Firepower Down|, |Weak| and |Vulnerable| to each enemy. Gain 20 <sprite=\"Point\" name=\"Power\">."
   UpgradedExtraDescription2: "{FriendU}If any enemy's life is less than 33%, defeat it. Then, apply {Value2} |Firepower Down|, |Weak| and |Vulnerable| to each enemy. Gain 30 <sprite=\"Point\" name=\"Power\">."
   Name: Dayuu, Sparrow of Sobs and Skulls
-  FlavorText: \":sob:\"
+  FlavorText: ":sob:"
