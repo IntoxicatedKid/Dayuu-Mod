@@ -1,17 +1,17 @@
 Dayuu:
   Description: |-
-    |For each <sprite="ManaSprite" name="W"><sprite="ManaSprite" name="U"><sprite="ManaSprite" name="B"><sprite="ManaSprite" name="R"><sprite="ManaSprite" name="G"><sprite="ManaSprite" name="C"><sprite="ManaSprite" name="P"> spent|: Defeat each enemy with {Value1} or less life.
+    |For each <sprite="ManaSprite" name="W"><sprite="ManaSprite" name="U"><sprite="ManaSprite" name="B"><sprite="ManaSprite" name="R"><sprite="ManaSprite" name="G"><sprite="ManaSprite" name="C"><sprite="ManaSprite" name="P"> spent|: Defeat each enemy with {Value1} or less life. |High Fidelity Headphones| can't trigger this effect.
   UpgradedDescription: |-
-    |For each <sprite="ManaSprite" name="W"><sprite="ManaSprite" name="U"><sprite="ManaSprite" name="B"><sprite="ManaSprite" name="R"><sprite="ManaSprite" name="G"><sprite="ManaSprite" name="C"><sprite="ManaSprite" name="P"> spent|: Defeat each enemy with {Value1} or less life.
+    |For each <sprite="ManaSprite" name="W"><sprite="ManaSprite" name="U"><sprite="ManaSprite" name="B"><sprite="ManaSprite" name="R"><sprite="ManaSprite" name="G"><sprite="ManaSprite" name="C"><sprite="ManaSprite" name="P"> spent|: Defeat each enemy with {Value1} or less life. |High Fidelity Headphones| can't trigger this effect.
     |When drawn|: Gain {Mana}.
   Name: Dayuu
   FlavorText: ":skull:"
 DayuuFriend:
   Description: '{FriendP}Apply {Value1} |Temporary Firepower Down| to each enemy {Value1} times.'
   UpgradedDescription: '{FriendP}Apply {Value1} |Temporary Firepower Down| to each enemy {Value1} times.'
-  ExtraDescription1: "{FriendA}Apply {Value1} |Firepower Down| and |Weak| to each enemy. Gain 10 <sprite=\"Point\" name=\"Power\">. Return {SelfName} from the discard pile to the hand."
-  UpgradedExtraDescription1: "{FriendA}Apply {Value1} |Firepower Down| and |Weak| to each enemy. Gain 15 <sprite=\"Point\" name=\"Power\">. Return {SelfName} from the discard pile to the hand."
-  ExtraDescription2: "{FriendU}If any enemy's life is less than 33%, defeat it. Then, apply {Value2} |Firepower Down|, |Weak| and |Vulnerable| to each enemy. Gain 20 <sprite=\"Point\" name=\"Power\">."
-  UpgradedExtraDescription2: "{FriendU}If any enemy's life is less than 33%, defeat it. Then, apply {Value2} |Firepower Down|, |Weak| and |Vulnerable| to each enemy. Gain 30 <sprite=\"Point\" name=\"Power\">."
+  ExtraDescription1: "{FriendA}Apply {Value1} |Firepower Down| and |Weak| to each enemy. Gain 8 <sprite=\"Point\" name=\"Power\">. Return {SelfName} from the discard pile to the hand."
+  UpgradedExtraDescription1: "{FriendA}Apply {Value1} |Firepower Down| and |Weak| to each enemy. Gain 12 <sprite=\"Point\" name=\"Power\">. Return {SelfName} from the discard pile to the hand."
+  ExtraDescription2: "{FriendU}If any enemy's life is less than 33%, defeat it. Then, apply {Value2} |Firepower Down|, |Weak| and |Vulnerable| to each enemy. Gain 16 <sprite=\"Point\" name=\"Power\">."
+  UpgradedExtraDescription2: "{FriendU}If any enemy's life is less than 33%, defeat it. Then, apply {Value2} |Firepower Down|, |Weak| and |Vulnerable| to each enemy. Gain 24 <sprite=\"Point\" name=\"Power\">."
   Name: Dayuu, Sparrow of Sobs and Skulls
   FlavorText: ":sob:"

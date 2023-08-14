@@ -130,6 +130,8 @@ namespace DayuuMod
 
         internal static BepInEx.Logging.ManualLogSource log;
 
+        internal static TemplateSequenceTable sequenceTable = new TemplateSequenceTable();
+
         internal static IResourceSource embeddedSource = new EmbeddedSource(Assembly.GetExecutingAssembly());
 
 

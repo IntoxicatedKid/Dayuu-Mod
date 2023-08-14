@@ -19,6 +19,7 @@ using LBoL.Core.StatusEffects;
 using LBoL.Core.Randoms;
 using LBoL.Core.Units;
 using LBoL.Base.Extensions;
+using LBoL.EntityLib.Exhibits.Common;
 
 namespace DayuuMod
 {
@@ -114,12 +115,30 @@ namespace DayuuMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            if (SynergyAmountComplexMana(consumingMana, new ManaGroup() { White = 1, Blue = 1, Black = 1, Red = 1, Green = 1, Colorless = 1, Philosophy = 1}) > 0)
+            if (base.GameRun.Player.HasExhibit<Headphone>())
             {
-                foreach (Unit unit in selector.GetUnits(base.Battle))
-                if (unit.Hp <= base.Value1)
+                if (SynergyAmountComplexMana(consumingMana, new ManaGroup() { White = 1, Blue = 1, Black = 1, Red = 1, Green = 1, Colorless = 1, Philosophy = 1 }) > 1)
                 {
-                    yield return new ForceKillAction(base.Battle.Player, unit);
+                    foreach (Unit unit in selector.GetUnits(base.Battle))
+                    {
+                        if (unit.Hp <= base.Value1)
+                        {
+                            yield return new ForceKillAction(base.Battle.Player, unit);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (SynergyAmountComplexMana(consumingMana, new ManaGroup() { White = 1, Blue = 1, Black = 1, Red = 1, Green = 1, Colorless = 1, Philosophy = 1 }) > 0)
+                {
+                    foreach (Unit unit in selector.GetUnits(base.Battle))
+                    {
+                        if (unit.Hp <= base.Value1)
+                        {
+                            yield return new ForceKillAction(base.Battle.Player, unit);
+                        }
+                    }
                 }
             }
             yield break;

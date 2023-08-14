@@ -24,6 +24,8 @@ using LBoL.Core.Battle.Interactions;
 using LBoL.EntityLib.StatusEffects.Others;
 using System.Linq;
 using UnityEngine;
+using System.Security.Cryptography;
+using LBoL.EntityLib.JadeBoxes;
 
 namespace DayuuMod
 {
@@ -153,6 +155,15 @@ namespace DayuuMod
             }
             yield break;
         }
+        public override IEnumerable<BattleAction> SummonActions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
+        {
+            this.IsEthereal = false;
+            foreach (BattleAction battleAction in base.SummonActions(selector, consumingMana, precondition))
+            {
+                yield return battleAction;
+            }
+            yield break;
+        }
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
             if (precondition == null || ((MiniSelectCardInteraction)precondition).SelectedCard.FriendToken == FriendToken.Active)
@@ -169,11 +180,11 @@ namespace DayuuMod
                 }
                 if (!this.IsUpgraded)
                 {
-                    yield return new GainPowerAction(10);
+                    yield return new GainPowerAction(8);
                 }
                 else
                 {
-                    yield return new GainPowerAction(15);
+                    yield return new GainPowerAction(12);
                 }
             }
             else
@@ -203,12 +214,13 @@ namespace DayuuMod
                 }
                 if (!this.IsUpgraded)
                 {
-                    yield return new GainPowerAction(20);
+                    yield return new GainPowerAction(16);
                 }
                 else
                 {
-                    yield return new GainPowerAction(30);
+                    yield return new GainPowerAction(24);
                 }
+                yield return new RemoveCardAction(this);
             }
             yield break;
         }
