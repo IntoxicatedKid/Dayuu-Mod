@@ -220,17 +220,16 @@ namespace DayuuMod
                 {
                     yield return new GainPowerAction(24);
                 }
-                yield return new RemoveCardAction(this);
             }
             yield break;
         }
         public override IEnumerable<BattleAction> AfterUseAction()
         {
-            if (!base.Summoned)
+            if (!base.Summoned || base.Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            if (base.Loyalty <= 0)
+            if (base.Loyalty <= 0 || base.UltimateUsed == true)
             {
                 yield return new RemoveCardAction(this);
                 yield break;
