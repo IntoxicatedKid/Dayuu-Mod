@@ -1,17 +1,36 @@
-Dayuu:
-  Description: |-
-    |For each <sprite="ManaSprite" name="W"><sprite="ManaSprite" name="U"><sprite="ManaSprite" name="B"><sprite="ManaSprite" name="R"><sprite="ManaSprite" name="G"><sprite="ManaSprite" name="C"><sprite="ManaSprite" name="P"> spent|: Defeat each enemy with {Value1} or less life. |High Fidelity Headphones| can't trigger this effect.
-  UpgradedDescription: |-
-    |For each <sprite="ManaSprite" name="W"><sprite="ManaSprite" name="U"><sprite="ManaSprite" name="B"><sprite="ManaSprite" name="R"><sprite="ManaSprite" name="G"><sprite="ManaSprite" name="C"><sprite="ManaSprite" name="P"> spent|: Defeat each enemy with {Value1} or less life. |High Fidelity Headphones| can't trigger this effect.
-    |When drawn|: Gain {Mana}.
-  Name: Dayuu
-  FlavorText: ":skull:"
+DayuuAttack:
+  Description: "|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When played or discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
+  UpgradedDescription: "|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When played or discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
+  Name: Passer Secare
+  FlavorText: ":knife:"
+DayuuDefense:
+  Description: "Lose {Value1} life.\nGain {Block} |Block|.\nDiscard all attack cards from the hand. Draw that many cards."
+  UpgradedDescription: "Lose {Value1} life.\nGain {Block} |Block|.\nDiscard all attack cards from the hand. Draw that many cards."
+  Name: Late Night Bites
+  FlavorText: ":bird:"
+DayuuSkill:
+  Description: "Gain {Value1} |Temporary Firepower|.\nEnemies also gain {Value1} |Temporary Firepower|.\nDraw {Value2} cards. Attack cards drawn this way |temporarily costs| {Mana}."
+  UpgradedDescription: "Gain {Value1} |Temporary Firepower|.\nEnemies also gain {Value2} |Temporary Firepower|.\nDraw {Value2} cards. Attack cards drawn this way |temporarily costs| {Mana}."
+  Name: Youkai Symposium
+  FlavorText: ":beers:"
+DayuuPower:
+  Description: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each summoned |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| counts as {Value2} cards."
+  UpgradedDescription: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each summoned |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| counts as {Value2} cards."
+  Name: Color the World
+  FlavorText: ":handshake:"
 DayuuFriend:
-  Description: '{FriendP}Apply {Value1} |Temporary Firepower Down| to each enemy {Value1} times.'
-  UpgradedDescription: '{FriendP}Apply {Value1} |Temporary Firepower Down| to each enemy {Value1} times.'
-  ExtraDescription1: "{FriendA}Apply {Value1} |Firepower Down| and |Weak| to each enemy. Gain 8 <sprite=\"Point\" name=\"Power\">. Return {SelfName} from the discard pile to the hand."
-  UpgradedExtraDescription1: "{FriendA}Apply {Value1} |Firepower Down| and |Weak| to each enemy. Gain 12 <sprite=\"Point\" name=\"Power\">. Return {SelfName} from the discard pile to the hand."
-  ExtraDescription2: "{FriendU}If any enemy's life is less than 33%, defeat it. Then, apply {Value2} |Firepower Down|, |Weak| and |Vulnerable| to each enemy. Gain 16 <sprite=\"Point\" name=\"Power\">."
-  UpgradedExtraDescription2: "{FriendU}If any enemy's life is less than 33%, defeat it. Then, apply {Value2} |Firepower Down|, |Weak| and |Vulnerable| to each enemy. Gain 24 <sprite=\"Point\" name=\"Power\">."
+  Description: "{FriendP}|Sobbing Cries|: Apply {Value1} |Temporary Firepower Down| to each enemy."
+  UpgradedDescription: "{FriendP}|Sobbing Cries|: Apply {Value1} |Temporary Firepower Down| to each enemy."
+  ExtraDescription1: "{FriendA}|The Song of Sobs|: Apply {Value2} |Firepower Down| and |Weak| to each enemy. Return {SelfName} from the discard pile to the hand."
+  UpgradedExtraDescription1: "{FriendA}|The Song of Sobs|: Apply {Value2} |Firepower Down| and |Weak| to each enemy. Return {SelfName} from the discard pile to the hand."
+  ExtraDescription2: "{FriendU}|The Song of Skulls|: If any enemy's life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  UpgradedExtraDescription2: "{FriendU}|The Song of Skulls|: If any enemy's life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
   Name: Dayuu, Sparrow of Sobs and Skulls
   FlavorText: ":sob:"
+DayuuExodia:
+  Description: ""
+  UpgradedDescription: ""
+  ExtraDescription1: ""
+  UpgradedExtraDescription1: ""
+  Name: Dayuu, Forbidden One
+  FlavorText: ":skull:"

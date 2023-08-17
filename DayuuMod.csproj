@@ -297,8 +297,20 @@
 
     <ItemGroup>
       <None Remove="Resources\CardsEn.yaml" />
-      <None Remove="Resources\Dayuu.png" />
+      <None Remove="Resources\DayuuAttack.png" />
+      <None Remove="Resources\DayuuAttackMIO.png" />
+      <None Remove="Resources\DayuuDefense.png" />
+      <None Remove="Resources\DayuuDefenseMIO.png" />
+      <None Remove="Resources\DayuuExodia.png" />
+      <None Remove="Resources\DayuuExodiaMIO.png" />
       <None Remove="Resources\DayuuFriend.png" />
+      <None Remove="Resources\DayuuFriendMIO.png" />
+      <None Remove="Resources\DayuuPower.png" />
+      <None Remove="Resources\DayuuPowerMIO.png" />
+      <None Remove="Resources\DayuuPowerSe.png" />
+      <None Remove="Resources\DayuuSkill.png" />
+      <None Remove="Resources\DayuuSkillMIO.png" />
+      <None Remove="Resources\StatusEffectsEn.yaml" />
     </ItemGroup>
 
 
