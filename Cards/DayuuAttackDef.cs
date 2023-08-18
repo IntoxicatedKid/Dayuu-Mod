@@ -249,12 +249,13 @@ namespace DayuuMod
         }
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
+            yield return base.AttackAction(base.Battle.RandomAliveEnemy);
             yield break;
         }
-        public override IEnumerable<BattleAction> AfterUseAction()
-        {
-            yield return new MoveCardToDrawZoneAction(this, DrawZoneTarget.Top);
-            yield break;
-        }
+        //public override IEnumerable<BattleAction> AfterUseAction()
+        //{
+        //    yield return new MoveCardToDrawZoneAction(this, DrawZoneTarget.Top);
+        //    yield break;
+        //}
     }
 }

@@ -310,6 +310,7 @@
       <None Remove="Resources\DayuuPowerSe.png" />
       <None Remove="Resources\DayuuSkill.png" />
       <None Remove="Resources\DayuuSkillMIO.png" />
+      <None Remove="Resources\DayuuSkillSe.png" />
       <None Remove="Resources\StatusEffectsEn.yaml" />
     </ItemGroup>
 

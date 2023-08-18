@@ -128,7 +128,7 @@ namespace DayuuMod
     }
     //
     //
-    // Warning: Gross code ahead! You have been warned!
+    // Warning: Terrible code
     //
     //
     [EntityLogic(typeof(DayuuFriendDef))]

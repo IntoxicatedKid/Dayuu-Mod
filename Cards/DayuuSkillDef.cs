@@ -118,22 +118,13 @@ namespace DayuuMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
+            yield return base.HealAction(base.Value2);
             yield return base.BuffAction<TempFirepower>(base.Value1, 0, 0, 0, 0.2f);
-            if (!this.IsUpgraded)
+            foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
             {
-                foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
-                {
-                    yield return new ApplyStatusEffectAction<TempFirepower>(enemyUnit, base.Value1, null, null, null, 0.2f, true);
-                }
+                yield return new ApplyStatusEffectAction<TempFirepower>(enemyUnit, this.IsUpgraded ? base.Value2 : base.Value1, null, null, null, 0.2f, true);
             }
-            else
-            {
-                foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
-                {
-                    yield return new ApplyStatusEffectAction<TempFirepower>(enemyUnit, base.Value2, null, null, null, 0.2f, true);
-                }
-            }
-            List<Card> playable = null;
+            List<Card> attack = null;
             DrawManyCardAction drawAction = new DrawManyCardAction(base.Value2);
             yield return drawAction;
             IReadOnlyList<Card> drawnCards = drawAction.DrawnCards;
@@ -144,8 +135,8 @@ namespace DayuuMod
                 //{
                 //    yield return new ExileManyCardAction(negative);
                 //}
-                playable = drawnCards.Where((Card card) => (card.CardType == CardType.Attack) && !card.IsForbidden).ToList<Card>();
-                foreach (Card card in playable)
+                attack = drawnCards.Where((Card card) => (card.CardType == CardType.Attack) && !card.IsForbidden).ToList<Card>();
+                foreach (Card card in attack)
                 {
                     card.SetTurnCost(base.Mana);
                     //yield return new UseCardAction(card, selector, consumingMana);

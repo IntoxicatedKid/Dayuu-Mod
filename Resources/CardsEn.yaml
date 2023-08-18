@@ -1,16 +1,16 @@
 DayuuAttack:
-  Description: "|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When played or discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
-  UpgradedDescription: "|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When played or discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
+  Description: "Deal {Damage} damage to a random enemy.\n|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
+  UpgradedDescription: "Deal {Damage} damage to a random enemy.\n|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
   Name: Passer Secare
   FlavorText: ":knife:"
 DayuuDefense:
-  Description: "Lose {Value1} life.\nGain {Block} |Block|.\nDiscard all attack cards from the hand. Draw that many cards."
-  UpgradedDescription: "Lose {Value1} life.\nGain {Block} |Block|.\nDiscard all attack cards from the hand. Draw that many cards."
+  Description: "Lose {Value1} life.\nGain {Block} |Block|.\nDiscard all attack cards from the hand, then draw that many cards."
+  UpgradedDescription: "Lose {Value1} life.\nGain {Block} |Block|.\nDiscard all attack cards from the hand, then draw that many cards."
   Name: Late Night Bites
   FlavorText: ":bird:"
 DayuuSkill:
-  Description: "Gain {Value1} |Temporary Firepower|.\nEnemies also gain {Value1} |Temporary Firepower|.\nDraw {Value2} cards. Attack cards drawn this way |temporarily costs| {Mana}."
-  UpgradedDescription: "Gain {Value1} |Temporary Firepower|.\nEnemies also gain {Value2} |Temporary Firepower|.\nDraw {Value2} cards. Attack cards drawn this way |temporarily costs| {Mana}."
+  Description: "Gain {Value2} life.\nGain {Value1} |Temporary Firepower|. Enemies also gain {Value1} |Temporary Firepower|.\nDraw {Value2} cards. Attack cards drawn this way |temporarily costs| {Mana}."
+  UpgradedDescription: "Gain {Value2} life.\nGain {Value1} |Temporary Firepower|. Enemies also gain {Value2} |Temporary Firepower|.\nDraw {Value2} cards. Attack cards drawn this way |temporarily costs| {Mana}."
   Name: Youkai Symposium
   FlavorText: ":beers:"
 DayuuPower:
@@ -28,9 +28,7 @@ DayuuFriend:
   Name: Dayuu, Sparrow of Sobs and Skulls
   FlavorText: ":sob:"
 DayuuExodia:
-  Description: ""
-  UpgradedDescription: ""
-  ExtraDescription1: ""
-  UpgradedExtraDescription1: ""
+  Description: "{FriendP}Deal {Value1} damage to each enemy."
+  UpgradedDescription: "{FriendP}Deal {Value1} damage to each enemy."
   Name: Dayuu, Forbidden One
   FlavorText: ":skull:"
