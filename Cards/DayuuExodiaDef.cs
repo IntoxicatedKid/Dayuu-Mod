@@ -31,6 +31,7 @@ using static MonoMod.Cil.RuntimeILReferenceBag.FastDelegateInvokers;
 using LBoL.EntityLib.Cards.Character.Sakuya;
 using static DayuuMod.BepinexPlugin;
 using LBoL.EntityLib.Cards.Character.Marisa;
+using Mono.Cecil;
 
 namespace DayuuMod
 {
@@ -75,7 +76,7 @@ namespace DayuuMod
                TargetType: TargetType.Nobody,
                Colors: new List<ManaColor>() { ManaColor.Colorless },
                IsXCost: false,
-               Cost: new ManaGroup() { Any = 9 },
+               Cost: new ManaGroup() { Any = 0 },
                UpgradedCost: null,
                MoneyCost: null,
                Damage: null,
@@ -104,7 +105,7 @@ namespace DayuuMod
 
                Keywords: Keyword.None,
                UpgradedKeywords: Keyword.None,
-               EmptyDescription: true,
+               EmptyDescription: false,
                RelativeKeyword: Keyword.None,
                UpgradedRelativeKeyword: Keyword.None,
 

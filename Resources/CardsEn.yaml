@@ -29,6 +29,5 @@ DayuuFriend:
   FlavorText: ":sob:"
 DayuuExodia:
   Description: "{FriendP}Deal {Value1} damage to each enemy."
-  UpgradedDescription: "{FriendP}Deal {Value1} damage to each enemy."
   Name: Dayuu, Forbidden One
   FlavorText: ":skull:"
