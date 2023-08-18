@@ -97,8 +97,8 @@ namespace DayuuMod
                Keywords: Keyword.None,
                UpgradedKeywords: Keyword.None,
                EmptyDescription: false,
-               RelativeKeyword: Keyword.Misfortune,
-               UpgradedRelativeKeyword: Keyword.Misfortune,
+               RelativeKeyword: Keyword.TempMorph,
+               UpgradedRelativeKeyword: Keyword.TempMorph,
 
                RelativeEffects: new List<string>() { "TempFirepower", "DayuuExodiaSe" },
                UpgradedRelativeEffects: new List<string>() { "TempFirepower", "DayuuExodiaSe" },

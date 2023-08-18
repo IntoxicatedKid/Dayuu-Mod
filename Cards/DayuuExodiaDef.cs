@@ -75,7 +75,7 @@ namespace DayuuMod
                TargetType: TargetType.Nobody,
                Colors: new List<ManaColor>() { ManaColor.Colorless },
                IsXCost: false,
-               Cost: new ManaGroup() { },
+               Cost: new ManaGroup() { Any = 9 },
                UpgradedCost: null,
                MoneyCost: null,
                Damage: null,

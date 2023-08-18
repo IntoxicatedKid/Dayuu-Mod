@@ -96,8 +96,8 @@ namespace DayuuMod
                Keywords: Keyword.None,
                UpgradedKeywords: Keyword.None,
                EmptyDescription: false,
-               RelativeKeyword: Keyword.None,
-               UpgradedRelativeKeyword: Keyword.None,
+               RelativeKeyword: Keyword.Block,
+               UpgradedRelativeKeyword: Keyword.Block,
 
                RelativeEffects: new List<string>() { "DayuuExodiaSe" },
                UpgradedRelativeEffects: new List<string>() { "DayuuExodiaSe" },
