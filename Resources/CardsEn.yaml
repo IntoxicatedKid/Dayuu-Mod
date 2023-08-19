@@ -4,8 +4,8 @@ DayuuAttack:
   Name: Passer Secare
   FlavorText: ":knife:"
 DayuuDefense:
-  Description: "Lose {Value1} life.\nGain {Block} |Block|.\nDiscard all attack cards from the hand, then draw that many cards."
-  UpgradedDescription: "Lose {Value1} life.\nGain {Block} |Block|.\nDiscard all attack cards from the hand, then draw that many cards."
+  Description: "Lose {Value1} life.\nGain {Block} |Block|.\nPut the top card of the draw and discard piles into the hand. Discard all attack cards placed this way."
+  UpgradedDescription: "Lose {Value1} life.\nGain {Block} |Block|.\nPut the top card of the draw and discard piles into the hand. Discard all attack cards placed this way."
   Name: Late Night Bites
   FlavorText: ":bird:"
 DayuuSkill:

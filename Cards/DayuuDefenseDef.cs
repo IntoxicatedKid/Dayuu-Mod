@@ -23,6 +23,7 @@ using LBoL.EntityLib.Exhibits.Common;
 using static DayuuMod.BepinexPlugin;
 using System.Linq;
 using LBoL.Presentation.UI.Panels;
+using Mono.Cecil;
 
 namespace DayuuMod
 {
@@ -72,11 +73,11 @@ namespace DayuuMod
                Damage: null,
                UpgradedDamage: null,
                Block: 20,
-               UpgradedBlock: 26,
+               UpgradedBlock: 25,
                Shield: null,
                UpgradedShield: null,
-               Value1: 1,
-               UpgradedValue1: null,
+               Value1: 2,
+               UpgradedValue1: 1,
                Value2: null,
                UpgradedValue2: null,
                Mana: null,
@@ -126,13 +127,24 @@ namespace DayuuMod
         {
             yield return base.SacrificeAction(base.Value1);
             yield return base.DefenseAction(true);
-            List<Card> list = base.Battle.HandZone.Where((Card card) => card.CardType == CardType.Attack).ToList<Card>();
-            if (list.Count > 0)
+            if (base.Battle.DrawZone.Count > 0)
             {
-                yield return new DiscardManyAction(list);
-                yield return new DrawManyCardAction(list.Count);
+                Card drawzone = base.Battle.DrawZone.First<Card>();
+                yield return new MoveCardAction(drawzone, CardZone.Hand);
+                if (drawzone.CardType.Equals(CardType.Attack))
+                {
+                    yield return new DiscardAction(drawzone);
+                }
             }
-            list = null;
+            if (base.Battle.DiscardZone.Count > 0)
+            {
+                Card discardzone = base.Battle.DiscardZone.Last<Card>();
+                yield return new MoveCardAction(discardzone, CardZone.Hand);
+                if (discardzone.CardType.Equals(CardType.Attack))
+                {
+                    yield return new DiscardAction(discardzone);
+                }
+            }
             yield break;
         }
     }

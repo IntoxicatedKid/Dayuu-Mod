@@ -26,6 +26,7 @@ using Mono.Cecil;
 using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
+using DayuuMod;
 
 namespace DayuuMod
 {
@@ -187,7 +188,7 @@ namespace DayuuMod
                     List<Card> list = base.Battle.HandZone.Where((Card card) => (card.CardType == CardType.Friend) && card.Summoned && !(card is DayuuFriend)).ToList<Card>();
                     List<Card> list2 = base.Battle.HandZone.Where((Card card) => (card is DayuuFriend) && card.Summoned).ToList<Card>();
                     if (list.Count > 0 || list2.Count > 0)
-                    base.NotifyActivating();
+                        base.NotifyActivating();
                     ManaGroup manaGroup = ManaGroup.Single(ManaColors.Colors.Sample(base.GameRun.BattleRng));
                     yield return new GainManaAction(manaGroup * (base.Count * list.Count));
                     yield return new GainManaAction(manaGroup * (base.Level * list2.Count));

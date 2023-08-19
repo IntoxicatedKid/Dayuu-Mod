@@ -23,6 +23,7 @@ using LBoL.EntityLib.Exhibits.Common;
 using System.Linq;
 using LBoL.Presentation.UI.Panels;
 using static DayuuMod.BepinexPlugin;
+using Mono.Cecil;
 
 namespace DayuuMod
 {

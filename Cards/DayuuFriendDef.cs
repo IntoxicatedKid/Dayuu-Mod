@@ -36,6 +36,8 @@ using LBoL.EntityLib.Cards.Character.Sakuya;
 using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.GapOptions;
+using Mono.Cecil;
+using DayuuMod;
 
 namespace DayuuMod
 {
@@ -80,7 +82,7 @@ namespace DayuuMod
                TargetType: TargetType.Nobody,
                Colors: new List<ManaColor>() { ManaColor.Black },
                IsXCost: false,
-               Cost: new ManaGroup() { Any = 2, Black = 1},
+               Cost: new ManaGroup() { Any = 2, Black = 1 },
                UpgradedCost: null,
                MoneyCost: null,
                Damage: null,
@@ -169,7 +171,7 @@ namespace DayuuMod
                     {
                         yield return new RemoveCardAction(card);
                     }
-                    List<Card> Exodia = new List<Card>{Library.CreateCard<DayuuExodia>()}.ToList<Card>();
+                    List<Card> Exodia = new List<Card> { Library.CreateCard<DayuuExodia>() }.ToList<Card>();
                     foreach (Card card in Exodia)
                     {
                         card.Summon();
