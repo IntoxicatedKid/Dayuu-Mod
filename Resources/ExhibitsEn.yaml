@@ -1,0 +1,8 @@
+SmallSparrow:
+  Description: "When acquired, choose 1 of {Value1} |Remnants| cards to add to the library.\nWhenever a |Remnants| card is drawn, gain mana equal to that card's colored mana cost."
+  Name: Small Sparrow
+  FlavorText: "People have been committing sins since long ago. Why do they commit sins, knowing it's wrong?"
+Th18BlankCard:
+  Description: "At the start of {PlayerName}'s first turn each combat, |Exile| each card from the hand. Then, add that many random non-|Misfortune| and non-status cards to the hand.\nThose cards inherit the type, rarity and |Upgrade| from |Exiled| cards."
+  Name: Old Blank Card
+  FlavorText: "This Blank Card was said to have the ability of Chimata Tenkyuu."
