@@ -1,8 +1,0 @@
-DayuuPowerSe:
-    Brief: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each summoned |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| count as {Value2} cards."
-    Description: "At the start of {PlayerName}'s turn, gain {Count} random mana for each summoned |Teammate| cards in the hand.\nFor each summoned |Dayuu, Sparrow of Sobs and Skulls| in the hand, gain {Level} random mana instead."
-    Name: Color the World
-DayuuExodiaSe:
-    Brief: "If |Passer Secare|, |Late Night Bites|, |Youkai Symposium|, |Color the World|, summoned |Dayuu, Sparrow of Sobs and Skulls| is in the hand, remove them from combat and add a |Dayuu, Forbidden One| to the hand.\nIt enters the hand summoned."
-    Description: "If |Passer Secare|, |Late Night Bites|, |Youkai Symposium|, |Color the World|, summoned |Dayuu, Sparrow of Sobs and Skulls| is in the hand, remove them from combat and add a |Dayuu, Forbidden One| to the hand.\nIt enters the hand summoned."
-    Name: Advent
