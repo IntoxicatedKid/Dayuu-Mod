@@ -311,8 +311,8 @@
       <None Remove="Resources\DayuuFriendMIO.png" />
       <None Remove="Resources\DayuuSkill.png" />
       <None Remove="Resources\DayuuSkillMIO.png" />
+      <None Remove="Resources\DayuuSmallSparrow.png" />
       <None Remove="Resources\ExhibitsEn.yaml" />
-      <None Remove="Resources\SmallSparrow.png" />
       <None Remove="Resources\StatusEffectsEn.yaml" />
     </ItemGroup>
 
