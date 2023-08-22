@@ -1,4 +1,4 @@
-Adds 5+1 Dayuu cards to the game.
+Adds 5+1 Dayuu cards, 1 Dayuu exhibit to the game.
 It's more of a joke, practice mod and very unbalanced.
 I may not able to fix bugs since i have zero coding knowledge.
 You need LBoL-Entity-Sideloader to use this mod.
