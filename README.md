@@ -1,4 +1,4 @@
-Adds 5+1 Dayuu cards, 1 Dayuu exhibit to the game. It's more of a joke, practice mod and unbalanced.  
+Adds 5+1 Dayuu cards, 1 Dayuu exhibit to the game. It's more of a joke, practice mod.  
 You need LBoL-Entity-Sideloader to use this mod.
 
 Installation(Github): Download DayuuMod.dll and place it to Steam\steamapps\common\LBoL\BepInEx\plugins
