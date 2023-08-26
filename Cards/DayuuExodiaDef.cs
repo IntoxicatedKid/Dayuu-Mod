@@ -193,8 +193,6 @@ namespace DayuuMod
                 yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
                 yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
                 yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
                 yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 2.6f);
                 foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
                 {
@@ -220,8 +218,6 @@ namespace DayuuMod
             if (precondition == null || ((MiniSelectCardInteraction)precondition).SelectedCard.FriendToken == FriendToken.Active)
             {
                 base.Loyalty += base.ActiveCost;
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
                 yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
                 yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
                 yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);

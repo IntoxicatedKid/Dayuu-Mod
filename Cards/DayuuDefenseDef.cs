@@ -73,7 +73,7 @@ namespace DayuuMod
                Damage: null,
                UpgradedDamage: null,
                Block: 20,
-               UpgradedBlock: 25,
+               UpgradedBlock: 26,
                Shield: null,
                UpgradedShield: null,
                Value1: 2,

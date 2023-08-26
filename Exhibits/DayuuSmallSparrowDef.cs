@@ -33,6 +33,7 @@ using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using static DayuuMod.DayuuAbilityDef;
 using LBoL.Presentation.UI.Panels;
 using UnityEngine.InputSystem.Controls;
+using JetBrains.Annotations;
 
 namespace DayuuMod
 {
@@ -42,43 +43,25 @@ namespace DayuuMod
         {
             return nameof(DayuuSmallSparrow);
         }
-
         public override LocalizationOption LoadLocalization()
         {
             var locFiles = new LocalizationFiles(embeddedSource);
             locFiles.AddLocaleFile(Locale.En, "Resources.ExhibitsEn.yaml");
             return locFiles;
         }
-
         public override ExhibitSprites LoadSprite()
         {
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-
             Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
-
             exhibitSprites.main = wrap("");
-
-            // loads many custom sprites for futher use
-            //exhibitSprites.customSprites.Add("none", wrap("_none"));
-            //exhibitSprites.customSprites.Add("luna", wrap("_luna"));
-            //exhibitSprites.customSprites.Add("-luna", wrap("_-luna"));
-            //exhibitSprites.customSprites.Add("star", wrap("_star"));
-            //exhibitSprites.customSprites.Add("-star", wrap("_-star"));
-            //exhibitSprites.customSprites.Add("sunny", wrap("_sunny"));
-            //exhibitSprites.customSprites.Add("-sunny", wrap("_-sunny"));
-
-
             return exhibitSprites;
         }
-
-
-
         public override ExhibitConfig MakeConfig()
         {
             var exhibitConfig = new ExhibitConfig(
-                Index: 0,
+                Index: sequenceTable.Next(typeof(ExhibitConfig)),
                 Id: "",
                 Order: 10,
                 IsDebug: false,
@@ -103,52 +86,12 @@ namespace DayuuMod
                 // example of referring to UniqueId of an entity without calling MakeConfig
                 RelativeCards: new List<string>() { }
             );
-
             return exhibitConfig;
         }
-
         [EntityLogic(typeof(DayuuSmallSparrowDef))]
+        [UsedImplicitly]
         public sealed class DayuuSmallSparrow : Exhibit
         {
-            // Changes the icon according to last three cards played 
-            // Sunny = attack, Star = defense, Luna = skill
-            // this is where the keys of custom sprites are used
-            //public override string OverrideIconName
-            //{
-            //    get
-            //    {
-            //        if (Battle == null)
-            //            return Id;
-            //
-            //        if (triggered)
-            //            return Id;
-            //
-            //        if (cardTracker.Empty())
-            //            return Id + "none";
-            //        if (cardTracker.Count == 1)
-            //        {
-            //            if (cardTracker.Contains(CardType.Attack))
-            //                return Id + "sunny";
-            //            if (cardTracker.Contains(CardType.Defense))
-            //                return Id + "star";
-            //            if (cardTracker.Contains(CardType.Skill))
-            //                return Id + "luna";
-            //        }
-            //        if (cardTracker.Count == 2)
-            //        {
-            //            if (!cardTracker.Contains(CardType.Attack))
-            //                return Id + "-sunny";
-            //            if (!cardTracker.Contains(CardType.Defense))
-            //                return Id + "-star";
-            //            if (!cardTracker.Contains(CardType.Skill))
-            //                return Id + "-luna";
-            //        }
-            //
-            //
-            //        return Id;
-            //    }
-            //
-            //}
             protected override IEnumerator SpecialGain(PlayerUnit player)
             {
                 this.OnGain(player);

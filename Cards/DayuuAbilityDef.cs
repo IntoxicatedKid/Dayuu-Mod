@@ -26,7 +26,6 @@ using Mono.Cecil;
 using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
-using DayuuMod;
 
 namespace DayuuMod
 {

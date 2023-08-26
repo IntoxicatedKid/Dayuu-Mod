@@ -37,7 +37,6 @@ using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.GapOptions;
 using Mono.Cecil;
-using DayuuMod;
 
 namespace DayuuMod
 {
@@ -128,11 +127,6 @@ namespace DayuuMod
             return cardConfig;
         }
     }
-    //
-    //
-    // Warning: Terrible code
-    //
-    //
     [EntityLogic(typeof(DayuuFriendDef))]
     public sealed class DayuuFriend : Card
     {

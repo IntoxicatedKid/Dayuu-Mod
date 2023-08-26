@@ -77,7 +77,7 @@ namespace DayuuMod
                Cost: new ManaGroup() { Any = 2, White = 1 },
                UpgradedCost: null,
                MoneyCost: null,
-               Damage: 12,
+               Damage: 13,
                UpgradedDamage: null,
                Block: null,
                UpgradedBlock: null,
