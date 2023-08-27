@@ -127,24 +127,24 @@ namespace DayuuMod
         {
             yield return base.SacrificeAction(base.Value1);
             yield return base.DefenseAction(true);
-			if (base.Battle.DrawZone.Count > 0)
-			{
-				Card drawzone = base.Battle.DrawZone.First<Card>();
+            if (base.Battle.DrawZone.Count > 0)
+            {
+                Card drawzone = base.Battle.DrawZone.First<Card>();
                 yield return new MoveCardAction(drawzone, CardZone.Hand);
-                if (drawzone.CardType.Equals(CardType.Attack))
+                if ((drawzone.CardType == CardType.Attack) && (drawzone.Zone == CardZone.Hand))
                 {
                     yield return new DiscardAction(drawzone);
                 }
-			}
-			if (base.Battle.DiscardZone.Count > 0)
-			{
-				Card discardzone = base.Battle.DiscardZone.Last<Card>();
-				yield return new MoveCardAction(discardzone, CardZone.Hand);
-                if (discardzone.CardType.Equals(CardType.Attack))
+            }
+            if (base.Battle.DiscardZone.Count > 0)
+            {
+                Card discardzone = base.Battle.DiscardZone.Last<Card>();
+                yield return new MoveCardAction(discardzone, CardZone.Hand);
+                if ((discardzone.CardType == CardType.Attack) && (discardzone.Zone == CardZone.Hand))
                 {
                     yield return new DiscardAction(discardzone);
                 }
-			}
+            }
             yield break;
         }
     }
