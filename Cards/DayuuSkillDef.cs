@@ -77,10 +77,10 @@ namespace DayuuMod
                UpgradedBlock: null,
                Shield: null,
                UpgradedShield: null,
-               Value1: 3,
-               UpgradedValue1: 5,
-               Value2: 2,
-               UpgradedValue2: null,
+               Value1: 1,
+               UpgradedValue1: 2,
+               Value2: 3,
+               UpgradedValue2: 5,
                Mana: new ManaGroup() { Any = 0 },
                UpgradedMana: null,
                Scry: null,
@@ -119,14 +119,14 @@ namespace DayuuMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.HealAction(base.Value2);
-            yield return base.BuffAction<TempFirepower>(base.Value1, 0, 0, 0, 0.2f);
+            yield return base.HealAction(base.Value1);
+            yield return base.BuffAction<TempFirepower>(base.Value2, 0, 0, 0, 0.2f);
             foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
             {
-                yield return new ApplyStatusEffectAction<TempFirepower>(enemyUnit, this.IsUpgraded ? base.Value2 : base.Value1, null, null, null, 0.2f, true);
+                yield return new ApplyStatusEffectAction<TempFirepower>(enemyUnit, 2, null, null, null, 0.2f, true);
             }
             List<Card> attack = null;
-            DrawManyCardAction drawAction = new DrawManyCardAction(base.Value2);
+            DrawManyCardAction drawAction = new DrawManyCardAction(2);
             yield return drawAction;
             IReadOnlyList<Card> drawnCards = drawAction.DrawnCards;
             if (drawnCards != null && drawnCards.Count > 0)

@@ -199,7 +199,7 @@ namespace DayuuMod
                     enemyUnit.ClearBlockShield();
                     enemyUnit.ClearStatusEffects();
                 }
-                yield return new DamageAction(base.Battle.Player, base.Battle.AllAliveEnemies, DamageInfo.Reaction(base.Value1), "Instant", GunType.Single);
+                yield return new DamageAction(base.Battle.Player, base.Battle.AllAliveEnemies, DamageInfo.HpLose(base.Value1), "Instant", GunType.Single);
                 num = i;
             }
             yield break;

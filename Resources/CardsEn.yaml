@@ -1,6 +1,6 @@
 DayuuAttack:
-  Description: "Deal {Damage} damage to a random enemy.\n|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When played or discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
-  UpgradedDescription: "Deal {Damage} damage to a random enemy.\n|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When played or discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
+  Description: "Deal {Damage} damage to a random enemy.\n|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
+  UpgradedDescription: "Deal {Damage} damage to a random enemy.\n|When {SelfName} enters or leaves the hand|: Deal {Damage} damage to a random enemy.\n|When discarded|: Return {SelfName} from the discard pile to the top of the draw pile."
   Name: Passer Secare
   FlavorText: ":knife:"
 DayuuDefense:
@@ -9,24 +9,43 @@ DayuuDefense:
   Name: Late Night Bites
   FlavorText: ":bird:"
 DayuuSkill:
-  Description: "Gain {Value2} life.\nGain {Value1} |Temporary Firepower|. Enemies also gain {Value1} |Temporary Firepower|.\nDraw {Value2} card{Value2:plural one='' other='s'}. Attack cards drawn this way |temporarily costs| {Mana}."
-  UpgradedDescription: "Gain {Value2} life.\nGain {Value1} |Temporary Firepower|. Enemies also gain {Value2} |Temporary Firepower|.\nDraw {Value2} card{Value2:plural one='' other='s'}. Attack cards drawn this way |temporarily costs| {Mana}."
+  Description: "Gain {Value1} life.\nGain {Value2} |Temporary Firepower|. Enemies also gain 2 |Temporary Firepower|.\nDraw 2 card{Value2:plural one='' other='s'}. Attack cards drawn this way |temporarily costs| {Mana}."
+  UpgradedDescription: "Gain {Value1} life.\nGain {Value2} |Temporary Firepower|. Enemies also gain 2 |Temporary Firepower|.\nDraw 2 card{Value2:plural one='' other='s'}. Attack cards drawn this way |temporarily costs| {Mana}."
   Name: Youkai Symposium
   FlavorText: ":beers:"
 DayuuAbility:
-  Description: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each summoned |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| counts as {Value2} card{Value2:plural one='' other='s'}."
-  UpgradedDescription: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each summoned |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| counts as {Value2} card{Value2:plural one='' other='s'}."
+  Description: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| counts as {Value2} card{Value2:plural one='' other='s'}."
+  UpgradedDescription: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| counts as {Value2} card{Value2:plural one='' other='s'}."
   Name: Color the World
   FlavorText: ":handshake:"
 DayuuFriend:
-  Description: "{FriendP}Apply {Value1} |Temporary Firepower Down| to each enemy."
-  UpgradedDescription: "{FriendP}Apply {Value1} |Temporary Firepower Down| to each enemy."
-  ExtraDescription1: "{FriendA}Apply {Value2} |Firepower Down| and |Weak| to each enemy. Return {SelfName} from the discard pile to the hand."
-  UpgradedExtraDescription1: "{FriendA}Apply {Value2} |Firepower Down| and |Weak| to each enemy. Return {SelfName} from the discard pile to the hand."
-  ExtraDescription2: "{FriendU}If enemies' life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
-  UpgradedExtraDescription2: "{FriendU}If enemies' life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  Description: "{FriendP}|f:Sobbing Cries|: Apply {Value1} |Temporary Firepower Down| to each enemy."
+  UpgradedDescription: "{FriendP}|f:Sobbing Cries|: Apply {Value1} |Temporary Firepower Down| to each enemy."
+  ExtraDescription1: "{FriendA}|a:The Song of Sobs|: Apply {Value2} |Firepower Down| and |Weak| to each enemy. Doesn't discarded."
+  UpgradedExtraDescription1: "{FriendA}|a:The Song of Sobs|: Apply {Value2} |Firepower Down| and |Weak| to each enemy. Doesn't discarded."
+  ExtraDescription2: "{FriendU}|u:The Song of Skulls|: If enemies' life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  UpgradedExtraDescription2: "{FriendU}|u:The Song of Skulls|: If enemies' life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
   Name: Dayuu, Sparrow of Sobs and Skulls
   FlavorText: ":sob:"
+DayuuFriend2:
+  Description: "{FriendP}|f:Sobbing Cries|: Apply {Value1} |Temporary Firepower Down| to each enemy."
+  UpgradedDescription: "{FriendP}|f:Sobbing Cries|: Apply {Value1} |Temporary Firepower Down| to each enemy {Value1} times."
+  ExtraDescription1: "{FriendA}|a:The Song of Sobs|: Apply {Value2} |Firepower Down| and |Weak| to each enemy. Doesn't discarded."
+  UpgradedExtraDescription1: "{FriendA}|a:The Song of Sobs|: Apply {Value1} |Firepower Down| and |Weak| to each enemy. Doesn't discarded."
+  ExtraDescription2: "{FriendU}|u:The Song of Skulls|: If enemies' life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  UpgradedExtraDescription2: "{FriendU}|u:The Song of Skulls|: If enemies' life is less than 33%, defeat it. Then, apply 6 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  Name: Dayuu, Sparrow of Sobs and Skulls+
+  FlavorText: ":sob:"
 DayuuExodia:
-  Description: "{FriendP}Deal {Value1} damage to each enemy."
+  Description: "{FriendP}Deal |r:9999| damage to each enemy."
   Name: Dayuu, the Forbidden One
+DayuuReale:
+  Description: "{FriendS}|When drawn for the first time|: If profile name is not \"Dayuu\", |Exile| it. Otherwise, discard it and draw {Value2} card{Value2:plural one='' other='s'}.\n{FriendP}|f:Typing Messages|: Add a random |Remnant| card to hand."
+  UpgradedDescription: "{FriendS}|When drawn for the first time|: Discard it and draw {Value2} card{Value2:plural one='' other='s'}.\n{FriendP}|f:Typing Messages|: Add a random |Remnant| card to hand."
+  ExtraDescription1: "{FriendA}|a:Ping @Dayuu|: Add a random |Upgraded| |Remnant| card to hand. Gain {Value1} |Weak| and |Frail|. Doesn't discarded."
+  UpgradedExtraDescription1: "{FriendA}|a:Ping @Dayuu|: Add a random |Upgraded| |Remnant| card to hand. Gain {Value1} |Weak| and |Frail|. Doesn't discarded."
+  ExtraDescription2: "{FriendU}|u:DM @Dayuu with \"certain images\"|: Add a |Dayuu, Sparrow of Sobs and Skulls++| to the hand. It enters the hand summoned. Gain {Value1} |Weak|, |Frail| and |Vulnerable|.\nThis also happens if |Unity| is 7 or higher."
+  UpgradedExtraDescription2: "{FriendU}|u:DM @Dayuu with \"certain images\"|: Add a |Dayuu, Sparrow of Sobs and Skulls++| to the hand. It enters the hand summoned. Gain {Value1} |Weak|, |Frail| and |Vulnerable|.\nThis also happens if |Unity| is 7 or higher."
+  Name: Reale, Scary Stalker of Discord
+  FlavorText: ":skull:"
+  DetailText: "These |e:alternate cards| ignore total mana, mana color and mana of any color can be spent to pay their mana costs."

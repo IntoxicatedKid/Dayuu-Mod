@@ -320,7 +320,11 @@
       <None Remove="Resources\DayuuExodiaMIO.png" />
       <None Remove="Resources\DayuuExodiaSe.png" />
       <None Remove="Resources\DayuuFriend.png" />
+      <None Remove="Resources\DayuuFriend2.png" />
+      <None Remove="Resources\DayuuFriend2MIO.png" />
       <None Remove="Resources\DayuuFriendMIO.png" />
+      <None Remove="Resources\DayuuReale.png" />
+      <None Remove="Resources\DayuuRealeCruezor.png" />
       <None Remove="Resources\DayuuSkill.png" />
       <None Remove="Resources\DayuuSkillMIO.png" />
       <None Remove="Resources\DayuuSmallSparrow.png" />

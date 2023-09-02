@@ -49,7 +49,7 @@ namespace DayuuMod
             return locFiles;
         }
         // if some information is needed from this config it can be accessed by calling
-        // CardConfig.FromId(new DayuuPowerDef().UniqueId) 
+        // CardConfig.FromId(new DayuuAbilityDef().UniqueId) 
         public override CardConfig MakeConfig()
         {
             var cardConfig = new CardConfig(
@@ -121,7 +121,7 @@ namespace DayuuMod
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.BuffAction<DayuuAbilitySeDef.DayuuAbilitySe>(base.Value2, 0, 0, 1, 0.2f);
+                yield return base.BuffAction<DayuuAbilitySeDef.DayuuAbilitySe>(base.Value2, 0, 0, base.Value1, 0.2f);
                 yield break;
             }
         }
@@ -146,7 +146,7 @@ namespace DayuuMod
             return ResourceLoader.LoadSprite("Resources.DayuuAbilitySe.png", embeddedSource);
         }
         // if some information is needed from this config it can be accessed by calling
-        // StatusEffectConfig.FromId(new DayuuPowerSeDefinition().UniqueId) 
+        // StatusEffectConfig.FromId(new DayuuAbilitySeDefinition().UniqueId) 
         public override StatusEffectConfig MakeConfig()
         {
             var statusEffectConfig = new StatusEffectConfig(
@@ -162,7 +162,7 @@ namespace DayuuMod
                 DurationStackType: StackType.Add,
                 DurationDecreaseTiming: DurationDecreaseTiming.Custom,
                 HasCount: true,
-                CountStackType: StackType.Keep,
+                CountStackType: StackType.Add,
                 LimitStackType: StackType.Keep,
                 ShowPlusByLimit: false,
                 Keywords: Keyword.None,
@@ -184,8 +184,8 @@ namespace DayuuMod
             {
                 if (!base.Battle.BattleShouldEnd)
                 {
-                    List<Card> list = base.Battle.HandZone.Where((Card card) => (card.CardType == CardType.Friend) && card.Summoned && !(card is DayuuFriend)).ToList<Card>();
-                    List<Card> list2 = base.Battle.HandZone.Where((Card card) => (card is DayuuFriend) && card.Summoned).ToList<Card>();
+                    List<Card> list = base.Battle.HandZone.Where((Card card) => (card.CardType == CardType.Friend) &&  !(card is DayuuFriend)).ToList<Card>();
+                    List<Card> list2 = base.Battle.HandZone.Where((Card card) => card is DayuuFriend).ToList<Card>();
                     if (list.Count > 0 || list2.Count > 0)
                         base.NotifyActivating();
                     ManaGroup manaGroup = ManaGroup.Single(ManaColors.Colors.Sample(base.GameRun.BattleRng));

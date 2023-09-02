@@ -83,7 +83,7 @@ namespace DayuuMod
                UpgradedBlock: null,
                Shield: null,
                UpgradedShield: null,
-               Value1: 1,
+               Value1: null,
                UpgradedValue1: null,
                Value2: null,
                UpgradedValue2: null,
@@ -253,10 +253,10 @@ namespace DayuuMod
             yield return base.AttackAction(base.Battle.RandomAliveEnemy);
             yield break;
         }
-        public override IEnumerable<BattleAction> AfterUseAction()
+        /*public override IEnumerable<BattleAction> AfterUseAction()
         {
             yield return new MoveCardToDrawZoneAction(this, DrawZoneTarget.Top);
             yield break;
-        }
+        }*/
     }
 }
