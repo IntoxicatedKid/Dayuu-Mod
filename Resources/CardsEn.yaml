@@ -9,8 +9,8 @@ DayuuDefense:
   Name: Late Night Bites
   FlavorText: ":bird:"
 DayuuSkill:
-  Description: "Gain {Value1} life.\nGain {Value2} |Temporary Firepower|. Enemies also gain 2 |Temporary Firepower|.\nDraw 2 card{Value2:plural one='' other='s'}. Attack cards drawn this way |temporarily costs| {Mana}."
-  UpgradedDescription: "Gain {Value1} life.\nGain {Value2} |Temporary Firepower|. Enemies also gain 2 |Temporary Firepower|.\nDraw 2 card{Value2:plural one='' other='s'}. Attack cards drawn this way |temporarily costs| {Mana}."
+  Description: "Gain {Value1} life.\nGain {Value2} |Temporary Firepower|. Enemies also gain 2 |Temporary Firepower|.\nDraw 3 card{Value2:plural one='' other='s'}. Attack cards drawn this way |temporarily costs| {Mana}."
+  UpgradedDescription: "Gain {Value1} life.\nGain {Value2} |Temporary Firepower|. Enemies also gain 2 |Temporary Firepower|.\nDraw 3 card{Value2:plural one='' other='s'}. Attack cards drawn this way |temporarily costs| {Mana}."
   Name: Youkai Symposium
   FlavorText: ":beers:"
 DayuuAbility:

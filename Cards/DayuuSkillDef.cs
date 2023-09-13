@@ -126,7 +126,7 @@ namespace DayuuMod
                 yield return new ApplyStatusEffectAction<TempFirepower>(enemyUnit, 2, null, null, null, 0.2f, true);
             }
             List<Card> attack = null;
-            DrawManyCardAction drawAction = new DrawManyCardAction(2);
+            DrawManyCardAction drawAction = new DrawManyCardAction(3);
             yield return drawAction;
             IReadOnlyList<Card> drawnCards = drawAction.DrawnCards;
             if (drawnCards != null && drawnCards.Count > 0)

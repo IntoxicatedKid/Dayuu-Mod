@@ -36,6 +36,7 @@ using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.GapOptions;
 using Mono.Cecil;
+using DayuuMod;
 using LBoL.Core.SaveData;
 using UnityEngine.Assertions.Must;
 using LBoL.Presentation;

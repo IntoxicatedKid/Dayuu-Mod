@@ -36,6 +36,7 @@ using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.GapOptions;
 using Mono.Cecil;
+using DayuuMod;
 
 namespace DayuuMod
 {
@@ -140,10 +141,10 @@ namespace DayuuMod
                 List<Card> DayuuA = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack)).ToList<Card>();
                 List<Card> DayuuD = base.Battle.HandZone.Where((Card card) => (card is DayuuDefense)).ToList<Card>();
                 List<Card> DayuuS = base.Battle.HandZone.Where((Card card) => (card is DayuuSkill)).ToList<Card>();
-                List<Card> DayuuP = base.Battle.HandZone.Where((Card card) => (card is DayuuAbilityDef.DayuuAbility)).ToList<Card>();
+                List<Card> DayuuP = base.Battle.HandZone.Where((Card card) => (card is DayuuAbility)).ToList<Card>();
                 if (DayuuA.Count > 0 && DayuuD.Count > 0 && DayuuS.Count > 0 && DayuuP.Count > 0)
                 {
-                    List<Card> Dayuu = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack) || (card is DayuuDefense) || (card is DayuuSkill) || (card is DayuuAbilityDef.DayuuAbility) || card is DayuuFriend || card is DayuuFriend2).ToList<Card>();
+                    List<Card> Dayuu = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack) || (card is DayuuDefense) || (card is DayuuSkill) || (card is DayuuAbility) || card is DayuuFriend || card is DayuuFriend2).ToList<Card>();
                     foreach (Card card in Dayuu)
                     {
                         yield return new RemoveCardAction(card);
@@ -404,10 +405,10 @@ namespace DayuuMod
                 List<Card> DayuuA = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack)).ToList<Card>();
                 List<Card> DayuuD = base.Battle.HandZone.Where((Card card) => (card is DayuuDefense)).ToList<Card>();
                 List<Card> DayuuS = base.Battle.HandZone.Where((Card card) => (card is DayuuSkill)).ToList<Card>();
-                List<Card> DayuuP = base.Battle.HandZone.Where((Card card) => (card is DayuuAbilityDef.DayuuAbility)).ToList<Card>();
+                List<Card> DayuuP = base.Battle.HandZone.Where((Card card) => (card is DayuuAbility)).ToList<Card>();
                 if (DayuuA.Count > 0 && DayuuD.Count > 0 && DayuuS.Count > 0 && DayuuP.Count > 0)
                 {
-                    List<Card> Dayuu = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack) || (card is DayuuDefense) || (card is DayuuSkill) || (card is DayuuAbilityDef.DayuuAbility) || card is DayuuFriend || card is DayuuFriend2).ToList<Card>();
+                    List<Card> Dayuu = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack) || (card is DayuuDefense) || (card is DayuuSkill) || (card is DayuuAbility) || card is DayuuFriend || card is DayuuFriend2).ToList<Card>();
                     foreach (Card card in Dayuu)
                     {
                         yield return new RemoveCardAction(card);

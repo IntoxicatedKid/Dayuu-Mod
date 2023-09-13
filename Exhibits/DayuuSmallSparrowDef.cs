@@ -94,7 +94,7 @@ namespace DayuuMod
             protected override IEnumerator SpecialGain(PlayerUnit player)
             {
                 this.OnGain(player);
-                List<Card> array = new List<Card>{Library.CreateCard<DayuuAttack>(),Library.CreateCard<DayuuDefense>(),Library.CreateCard<DayuuSkill>(),Library.CreateCard<DayuuAbilityDef.DayuuAbility>(),Library.CreateCard<DayuuFriend>()};
+                List<Card> array = new List<Card>{Library.CreateCard<DayuuAttack>(),Library.CreateCard<DayuuDefense>(),Library.CreateCard<DayuuSkill>(),Library.CreateCard<DayuuAbility>(),Library.CreateCard<DayuuFriend>()};
                 if (array.Count != 0)
                 {
                     base.GameRun.UpgradeNewDeckCardOnFlags(array);
@@ -122,7 +122,7 @@ namespace DayuuMod
 		    private IEnumerable<BattleAction> OnCardDrawn(CardEventArgs args)
 		    {
                 Card card = args.Card;
-		    	if (card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbilityDef.DayuuAbility || card is DayuuFriend)
+		    	if (card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbility || card is DayuuFriend)
                 {
 		    		base.NotifyActivating();
                     yield return new GainManaAction(card.ConfigCostAnyToColorless(true) - this.Mana);
