@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using DayuuMod.Stages;
 using HarmonyLib;
 using LBoL.Base;
 using LBoL.Base.Extensions;
@@ -151,6 +152,8 @@ namespace DayuuMod
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(AddWatermark.API.GUID))
                 WatermarkWrapper.ActivateWatermark();
+
+            NewBackgrounds.AddNewBackgrounds();
         }
 
         private void OnDestroy()

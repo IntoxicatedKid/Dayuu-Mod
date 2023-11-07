@@ -10,3 +10,7 @@ DayuuExodiaSe:
     Brief: "{PlayerName} can't lose life."
     Description: "{OwnerName} can't lose life."
     Name: Advent
+HexagonSe:
+    Brief: "{PlayerName} can only have up to 250 points of Barrier and Block.\nAccumulate damage every 10 seconds. When {PlayerName} plays a card, deal that much damage and lose all stack.\nAccumulate 5 more damage for every 30 seconds, up to 30 more damage.\nIf the accumulated damage reaches 100, {PlayerName} loses a life for each second, increased by the amount of accumulated damage."
+    Description: "{PlayerName} can only have up to 250 points of Barrier and Block.\nAccumulate {AccumulateDamage} damage every 10 seconds. When {PlayerName} plays a card, deal {Level} damage to her and lose all stack.\nAccumulate 5 more damage for every 30 seconds, up to 30 more damage.\nIf the accumulated damage reaches 100, {PlayerName} loses a life for each second, increased by the amount of accumulated damage.\n{OwnerName} loses 30 life for each second."
+    Name: Survival

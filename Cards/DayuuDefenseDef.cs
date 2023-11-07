@@ -25,7 +25,7 @@ using System.Linq;
 using LBoL.Presentation.UI.Panels;
 using Mono.Cecil;
 
-namespace DayuuMod
+namespace DayuuMod.Cards
 {
     public sealed class DayuuDefenseDef : CardTemplate
     {
@@ -125,26 +125,26 @@ namespace DayuuMod
         }
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.SacrificeAction(base.Value1);
-            yield return base.DefenseAction(true);
-			if (base.Battle.DrawZone.Count > 0)
-			{
-				Card drawzone = base.Battle.DrawZone.First<Card>();
+            yield return SacrificeAction(Value1);
+            yield return DefenseAction(true);
+            if (Battle.DrawZone.Count > 0)
+            {
+                Card drawzone = Battle.DrawZone.First();
                 yield return new MoveCardAction(drawzone, CardZone.Hand);
-                if ((drawzone.CardType == CardType.Attack) && (drawzone.Zone == CardZone.Hand))
+                if (drawzone.CardType == CardType.Attack && drawzone.Zone == CardZone.Hand)
                 {
                     yield return new DiscardAction(drawzone);
                 }
-			}
-			if (base.Battle.DiscardZone.Count > 0)
-			{
-				Card discardzone = base.Battle.DiscardZone.Last<Card>();
-				yield return new MoveCardAction(discardzone, CardZone.Hand);
-                if ((discardzone.CardType == CardType.Attack) && (discardzone.Zone == CardZone.Hand))
+            }
+            if (Battle.DiscardZone.Count > 0)
+            {
+                Card discardzone = Battle.DiscardZone.Last();
+                yield return new MoveCardAction(discardzone, CardZone.Hand);
+                if (discardzone.CardType == CardType.Attack && discardzone.Zone == CardZone.Hand)
                 {
                     yield return new DiscardAction(discardzone);
                 }
-			}
+            }
             yield break;
         }
     }

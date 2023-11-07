@@ -14,8 +14,8 @@ DayuuSkill:
   Name: Youkai Symposium
   FlavorText: ":beers:"
 DayuuAbility:
-  Description: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| counts as {Value2} card{Value2:plural one='' other='s'}."
-  UpgradedDescription: "At the start of {PlayerName}'s turn, gain {Value1} random mana for each |Teammate| cards in the hand.\n|Dayuu, Sparrow of Sobs and Skulls| counts as {Value2} card{Value2:plural one='' other='s'}."
+  Description: "At the start of {PlayerName}'s turn, gain {Value1} random mana.\nIncrease by {Value2} for each |Remnanat| card or |Teammate| card in the hand."
+  UpgradedDescription: "At the start of {PlayerName}'s turn, gain {Value1} random mana.\nIncrease by {Value2} for each |Remnanat| card or |Teammate| card in the hand."
   Name: Color the World
   FlavorText: ":handshake:"
 DayuuFriend:
@@ -49,3 +49,31 @@ DayuuReale:
   Name: Reale, Scary Stalker of Discord
   FlavorText: ":skull:"
   DetailText: "These |e:alternate cards| ignore total mana, mana color and mana of any color can be spent to pay their mana costs."
+DayuuReimuCirno:
+  Description: "TBD"
+  UpgradedDescription: "TBD"
+  Name: Binary Star
+  //DetailText: "{SelfName} can only be acquired if {PlayerName} has both Reimu and Cirno's starting Exhibit."
+DayuuReimuKoishi:
+  Description: "{FriendP}                 |p:??????|                 "
+  UpgradedDescription: "{FriendP}                 |p:??????|                 "
+  ExtraDescription1: "{FriendA}                 |p:??????|                 "
+  UpgradedExtraDescription1: "{FriendA}                 |p:??????|                 "
+  ExtraDescription2: "{FriendU}                 |p:??????|                 "
+  UpgradedExtraDescription2: "{FriendU}                 |p:??????|                 "
+  Name: "??????"
+DayuuReimuMarisa:
+  Description: "Deal {Damage} damage to each enemy {Value2} times."
+  UpgradedDescription: "Apply {Value1} |Vulnerable| to each enemy.\nDeal {Damage} damage to each enemy {Value2} times."
+  Name: Fantasy Spark
+  //DetailText: "{SelfName} can only be acquired if {PlayerName} has both Reimu and Marisa's starting Exhibit."
+DayuuReimuReimu:
+  Description: "TBD"
+  UpgradedDescription: "TBD"
+  Name: Forgotten Portrait
+  //DetailText: "{SelfName} can only be acquired by Reimu."
+DayuuReimuSakuya:
+  Description: "TBD"
+  UpgradedDescription: "TBD"
+  Name: Delicacy
+  //DetailText: "{SelfName} can only be acquired if {PlayerName} has both Reimu and Sakuya's starting Exhibit."

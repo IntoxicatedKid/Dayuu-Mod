@@ -36,9 +36,8 @@ using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.GapOptions;
 using Mono.Cecil;
-using DayuuMod;
 
-namespace DayuuMod
+namespace DayuuMod.Cards
 {
     public sealed class DayuuFriendDef : CardTemplate
     {
@@ -132,19 +131,19 @@ namespace DayuuMod
     {
         protected override void OnEnterBattle(BattleController battle)
         {
-            base.ReactBattleEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
+            ReactBattleEvent(Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(OnCardUsed));
         }
         private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
         {
-            if (!base.Battle.BattleShouldEnd && base.Battle.Player.IsInTurn && this.Zone == CardZone.Hand && this.Summoned)
+            if (!Battle.BattleShouldEnd && Battle.Player.IsInTurn && Zone == CardZone.Hand && Summoned)
             {
-                List<Card> DayuuA = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack)).ToList<Card>();
-                List<Card> DayuuD = base.Battle.HandZone.Where((Card card) => (card is DayuuDefense)).ToList<Card>();
-                List<Card> DayuuS = base.Battle.HandZone.Where((Card card) => (card is DayuuSkill)).ToList<Card>();
-                List<Card> DayuuP = base.Battle.HandZone.Where((Card card) => (card is DayuuAbility)).ToList<Card>();
+                List<Card> DayuuA = Battle.HandZone.Where((card) => card is DayuuAttack).ToList();
+                List<Card> DayuuD = Battle.HandZone.Where((card) => card is DayuuDefense).ToList();
+                List<Card> DayuuS = Battle.HandZone.Where((card) => card is DayuuSkill).ToList();
+                List<Card> DayuuP = Battle.HandZone.Where((card) => card is DayuuAbility).ToList();
                 if (DayuuA.Count > 0 && DayuuD.Count > 0 && DayuuS.Count > 0 && DayuuP.Count > 0)
                 {
-                    List<Card> Dayuu = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack) || (card is DayuuDefense) || (card is DayuuSkill) || (card is DayuuAbility) || card is DayuuFriend || card is DayuuFriend2).ToList<Card>();
+                    List<Card> Dayuu = Battle.HandZone.Where((card) => card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbility || card is DayuuFriend || card is DayuuFriend2).ToList();
                     foreach (Card card in Dayuu)
                     {
                         yield return new RemoveCardAction(card);
@@ -157,30 +156,30 @@ namespace DayuuMod
         }
         public override IEnumerable<BattleAction> OnTurnEndingInHand()
         {
-            return this.GetPassiveActions();
+            return GetPassiveActions();
         }
         public override IEnumerable<BattleAction> GetPassiveActions()
         {
-            if (!base.Summoned || base.Battle.BattleShouldEnd)
+            if (!Summoned || Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            base.NotifyActivating();
-            base.Loyalty += base.PassiveCost;
+            NotifyActivating();
+            Loyalty += PassiveCost;
             int num;
-            for (int i = 0; i < base.Battle.FriendPassiveTimes; i = num + 1)
+            for (int i = 0; i < Battle.FriendPassiveTimes; i = num + 1)
             {
-                if (base.Battle.BattleShouldEnd)
+                if (Battle.BattleShouldEnd)
                 {
                     yield break;
                 }
-                foreach (BattleAction battleAction in base.DebuffAction<TempFirepowerNegative>(base.Battle.AllAliveEnemies, base.Value1, 0, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction in DebuffAction<TempFirepowerNegative>(Battle.AllAliveEnemies, Value1, 0, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
                 }
                 num = i;
             }
-            if (base.Loyalty <= 0)
+            if (Loyalty <= 0)
             {
                 yield return new RemoveCardAction(this);
             }
@@ -188,7 +187,7 @@ namespace DayuuMod
         }
         public override IEnumerable<BattleAction> SummonActions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            this.IsEthereal = false;
+            IsEthereal = false;
             foreach (BattleAction battleAction in base.SummonActions(selector, consumingMana, precondition))
             {
                 yield return battleAction;
@@ -199,38 +198,38 @@ namespace DayuuMod
         {
             if (precondition == null || ((MiniSelectCardInteraction)precondition).SelectedCard.FriendToken == FriendToken.Active)
             {
-                base.Loyalty += base.ActiveCost;
-                yield return PerformAction.Effect(base.Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-                foreach (BattleAction battleAction in base.DebuffAction<FirepowerNegative>(base.Battle.AllAliveEnemies, base.Value2, 0, 0, 0, true, 0.2f))
+                Loyalty += ActiveCost;
+                yield return PerformAction.Effect(Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+                foreach (BattleAction battleAction in DebuffAction<FirepowerNegative>(Battle.AllAliveEnemies, Value2, 0, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
                 }
-                foreach (BattleAction battleAction2 in base.DebuffAction<Weak>(base.Battle.AllAliveEnemies, 0, base.Value2, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction2 in DebuffAction<Weak>(Battle.AllAliveEnemies, 0, Value2, 0, 0, true, 0.2f))
                 {
                     yield return battleAction2;
                 }
             }
             else
             {
-                base.Loyalty += base.UltimateCost;
-                base.UltimateUsed = true;
-                yield return PerformAction.Effect(base.Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-                foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
+                Loyalty += UltimateCost;
+                UltimateUsed = true;
+                yield return PerformAction.Effect(Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
                 {
                     if (enemyUnit.Hp <= (enemyUnit.MaxHp + 1) / 4)
                     {
-                        yield return new ForceKillAction(base.Battle.Player, enemyUnit);
+                        yield return new ForceKillAction(Battle.Player, enemyUnit);
                     }
                 }
-                foreach (BattleAction battleAction in base.DebuffAction<FirepowerNegative>(base.Battle.AllAliveEnemies, 3, 0, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction in DebuffAction<FirepowerNegative>(Battle.AllAliveEnemies, 3, 0, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
                 }
-                foreach (BattleAction battleAction2 in base.DebuffAction<Weak>(base.Battle.AllAliveEnemies, 0, 3, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction2 in DebuffAction<Weak>(Battle.AllAliveEnemies, 0, 3, 0, 0, true, 0.2f))
                 {
                     yield return battleAction2;
                 }
-                foreach (BattleAction battleAction3 in base.DebuffAction<Vulnerable>(base.Battle.AllAliveEnemies, 0, 3, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction3 in DebuffAction<Vulnerable>(Battle.AllAliveEnemies, 0, 3, 0, 0, true, 0.2f))
                 {
                     yield return battleAction3;
                 }
@@ -239,11 +238,11 @@ namespace DayuuMod
         }
         public override IEnumerable<BattleAction> AfterUseAction()
         {
-            if (!base.Summoned || base.Battle.BattleShouldEnd)
+            if (!Summoned || Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            if (base.Loyalty <= 0 || base.UltimateUsed == true)
+            if (Loyalty <= 0 || UltimateUsed == true)
             {
                 yield return new RemoveCardAction(this);
                 yield break;
@@ -396,19 +395,19 @@ namespace DayuuMod
     {
         protected override void OnEnterBattle(BattleController battle)
         {
-            base.ReactBattleEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
+            ReactBattleEvent(Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(OnCardUsed));
         }
         private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
         {
-            if (!base.Battle.BattleShouldEnd && base.Battle.Player.IsInTurn && this.Zone == CardZone.Hand && this.Summoned)
+            if (!Battle.BattleShouldEnd && Battle.Player.IsInTurn && Zone == CardZone.Hand && Summoned)
             {
-                List<Card> DayuuA = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack)).ToList<Card>();
-                List<Card> DayuuD = base.Battle.HandZone.Where((Card card) => (card is DayuuDefense)).ToList<Card>();
-                List<Card> DayuuS = base.Battle.HandZone.Where((Card card) => (card is DayuuSkill)).ToList<Card>();
-                List<Card> DayuuP = base.Battle.HandZone.Where((Card card) => (card is DayuuAbility)).ToList<Card>();
+                List<Card> DayuuA = Battle.HandZone.Where((card) => card is DayuuAttack).ToList();
+                List<Card> DayuuD = Battle.HandZone.Where((card) => card is DayuuDefense).ToList();
+                List<Card> DayuuS = Battle.HandZone.Where((card) => card is DayuuSkill).ToList();
+                List<Card> DayuuP = Battle.HandZone.Where((card) => card is DayuuAbility).ToList();
                 if (DayuuA.Count > 0 && DayuuD.Count > 0 && DayuuS.Count > 0 && DayuuP.Count > 0)
                 {
-                    List<Card> Dayuu = base.Battle.HandZone.Where((Card card) => (card is DayuuAttack) || (card is DayuuDefense) || (card is DayuuSkill) || (card is DayuuAbility) || card is DayuuFriend || card is DayuuFriend2).ToList<Card>();
+                    List<Card> Dayuu = Battle.HandZone.Where((card) => card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbility || card is DayuuFriend || card is DayuuFriend2).ToList();
                     foreach (Card card in Dayuu)
                     {
                         yield return new RemoveCardAction(card);
@@ -421,37 +420,37 @@ namespace DayuuMod
         }
         public override IEnumerable<BattleAction> OnTurnEndingInHand()
         {
-            return this.GetPassiveActions();
+            return GetPassiveActions();
         }
         public override IEnumerable<BattleAction> GetPassiveActions()
         {
-            if (!base.Summoned || base.Battle.BattleShouldEnd)
+            if (!Summoned || Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            base.NotifyActivating();
-            base.Loyalty += base.PassiveCost;
+            NotifyActivating();
+            Loyalty += PassiveCost;
             int num;
-            for (int i = 0; i < base.Battle.FriendPassiveTimes; i = num + 1)
+            for (int i = 0; i < Battle.FriendPassiveTimes; i = num + 1)
             {
-                if (base.Battle.BattleShouldEnd)
+                if (Battle.BattleShouldEnd)
                 {
                     yield break;
                 }
-                foreach (BattleAction battleAction in base.DebuffAction<TempFirepowerNegative>(base.Battle.AllAliveEnemies, base.Value1, 0, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction in DebuffAction<TempFirepowerNegative>(Battle.AllAliveEnemies, Value1, 0, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
                 }
-                if (this.IsUpgraded)
+                if (IsUpgraded)
                 {
-                    foreach (BattleAction battleAction2 in base.DebuffAction<TempFirepowerNegative>(base.Battle.AllAliveEnemies, base.Value1, 0, 0, 0, true, 0.2f))
+                    foreach (BattleAction battleAction2 in DebuffAction<TempFirepowerNegative>(Battle.AllAliveEnemies, Value1, 0, 0, 0, true, 0.2f))
                     {
                         yield return battleAction2;
                     }
                 }
                 num = i;
             }
-            if (base.Loyalty <= 0)
+            if (Loyalty <= 0)
             {
                 yield return new RemoveCardAction(this);
             }
@@ -459,7 +458,7 @@ namespace DayuuMod
         }
         public override IEnumerable<BattleAction> SummonActions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            this.IsEthereal = false;
+            IsEthereal = false;
             foreach (BattleAction battleAction in base.SummonActions(selector, consumingMana, precondition))
             {
                 yield return battleAction;
@@ -470,38 +469,38 @@ namespace DayuuMod
         {
             if (precondition == null || ((MiniSelectCardInteraction)precondition).SelectedCard.FriendToken == FriendToken.Active)
             {
-                base.Loyalty += base.ActiveCost;
-                yield return PerformAction.Effect(base.Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-                foreach (BattleAction battleAction in base.DebuffAction<FirepowerNegative>(base.Battle.AllAliveEnemies, this.IsUpgraded ? base.Value1 : base.Value2, 0, 0, 0, true, 0.2f))
+                Loyalty += ActiveCost;
+                yield return PerformAction.Effect(Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+                foreach (BattleAction battleAction in DebuffAction<FirepowerNegative>(Battle.AllAliveEnemies, IsUpgraded ? Value1 : Value2, 0, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
                 }
-                foreach (BattleAction battleAction2 in base.DebuffAction<Weak>(base.Battle.AllAliveEnemies, 0, this.IsUpgraded ? base.Value1 : base.Value2, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction2 in DebuffAction<Weak>(Battle.AllAliveEnemies, 0, IsUpgraded ? Value1 : Value2, 0, 0, true, 0.2f))
                 {
                     yield return battleAction2;
                 }
             }
             else
             {
-                base.Loyalty += base.UltimateCost;
-                base.UltimateUsed = true;
-                yield return PerformAction.Effect(base.Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-                foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
+                Loyalty += UltimateCost;
+                UltimateUsed = true;
+                yield return PerformAction.Effect(Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
                 {
-                    if (enemyUnit.Hp <= (enemyUnit.MaxHp + 1) / (this.IsUpgraded ? 3 : 4))
+                    if (enemyUnit.Hp <= (enemyUnit.MaxHp + 1) / (IsUpgraded ? 3 : 4))
                     {
-                        yield return new ForceKillAction(base.Battle.Player, enemyUnit);
+                        yield return new ForceKillAction(Battle.Player, enemyUnit);
                     }
                 }
-                foreach (BattleAction battleAction in base.DebuffAction<FirepowerNegative>(base.Battle.AllAliveEnemies, this.IsUpgraded ? 6 : 3, 0, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction in DebuffAction<FirepowerNegative>(Battle.AllAliveEnemies, IsUpgraded ? 6 : 3, 0, 0, 0, true, 0.2f))
                 {
                     yield return battleAction;
                 }
-                foreach (BattleAction battleAction2 in base.DebuffAction<Weak>(base.Battle.AllAliveEnemies, 0, this.IsUpgraded ? 6 : 3, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction2 in DebuffAction<Weak>(Battle.AllAliveEnemies, 0, IsUpgraded ? 6 : 3, 0, 0, true, 0.2f))
                 {
                     yield return battleAction2;
                 }
-                foreach (BattleAction battleAction3 in base.DebuffAction<Vulnerable>(base.Battle.AllAliveEnemies, 0, this.IsUpgraded ? 6 : 3, 0, 0, true, 0.2f))
+                foreach (BattleAction battleAction3 in DebuffAction<Vulnerable>(Battle.AllAliveEnemies, 0, IsUpgraded ? 6 : 3, 0, 0, true, 0.2f))
                 {
                     yield return battleAction3;
                 }
@@ -510,11 +509,11 @@ namespace DayuuMod
         }
         public override IEnumerable<BattleAction> AfterUseAction()
         {
-            if (!base.Summoned || base.Battle.BattleShouldEnd)
+            if (!Summoned || Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            if (base.Loyalty <= 0 || base.UltimateUsed == true)
+            if (Loyalty <= 0 || UltimateUsed == true)
             {
                 yield return new RemoveCardAction(this);
                 yield break;

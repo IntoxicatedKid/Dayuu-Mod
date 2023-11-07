@@ -33,8 +33,9 @@ using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using LBoL.Presentation.UI.Panels;
 using UnityEngine.InputSystem.Controls;
 using JetBrains.Annotations;
+using DayuuMod.Cards;
 
-namespace DayuuMod
+namespace DayuuMod.Exhibits
 {
     public sealed class DayuuSmallSparrowDef : ExhibitTemplate
     {
@@ -53,7 +54,7 @@ namespace DayuuMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -93,20 +94,20 @@ namespace DayuuMod
         {
             protected override IEnumerator SpecialGain(PlayerUnit player)
             {
-                this.OnGain(player);
-                List<Card> array = new List<Card>{Library.CreateCard<DayuuAttack>(),Library.CreateCard<DayuuDefense>(),Library.CreateCard<DayuuSkill>(),Library.CreateCard<DayuuAbility>(),Library.CreateCard<DayuuFriend>()};
+                OnGain(player);
+                List<Card> array = new List<Card> { Library.CreateCard<DayuuAttack>(), Library.CreateCard<DayuuDefense>(), Library.CreateCard<DayuuSkill>(), Library.CreateCard<DayuuAbility>(), Library.CreateCard<DayuuFriend>() };
                 if (array.Count != 0)
                 {
-                    base.GameRun.UpgradeNewDeckCardOnFlags(array);
+                    GameRun.UpgradeNewDeckCardOnFlags(array);
                     MiniSelectCardInteraction interaction = new MiniSelectCardInteraction(array, true, true, true)
                     {
                         Source = this
                     };
-                    yield return base.GameRun.InteractionViewer.View(interaction);
+                    yield return GameRun.InteractionViewer.View(interaction);
                     Card selectedCard = interaction.SelectedCard;
                     if (selectedCard != null)
                     {
-                        base.GameRun.AddDeckCard(selectedCard, true, new VisualSourceData
+                        GameRun.AddDeckCard(selectedCard, true, new VisualSourceData
                         {
                             SourceType = VisualSourceType.CardSelect
                         });
@@ -117,18 +118,18 @@ namespace DayuuMod
             }
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<CardEventArgs>(base.Battle.CardDrawn, new EventSequencedReactor<CardEventArgs>(this.OnCardDrawn));
+                ReactBattleEvent(Battle.CardDrawn, new EventSequencedReactor<CardEventArgs>(OnCardDrawn));
             }
-		    private IEnumerable<BattleAction> OnCardDrawn(CardEventArgs args)
-		    {
+            private IEnumerable<BattleAction> OnCardDrawn(CardEventArgs args)
+            {
                 Card card = args.Card;
-		    	if (card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbility || card is DayuuFriend)
+                if (card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbility || card is DayuuFriend)
                 {
-		    		base.NotifyActivating();
-                    yield return new GainManaAction(card.ConfigCostAnyToColorless(true) - this.Mana);
-		    	}
-		    	yield break;
-		    }
+                    NotifyActivating();
+                    yield return new GainManaAction(card.ConfigCostAnyToColorless(true) - Mana);
+                }
+                yield break;
+            }
         }
     }
 }

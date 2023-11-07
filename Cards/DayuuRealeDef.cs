@@ -36,12 +36,11 @@ using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.GapOptions;
 using Mono.Cecil;
-using DayuuMod;
 using LBoL.Core.SaveData;
 using UnityEngine.Assertions.Must;
 using LBoL.Presentation;
 
-namespace DayuuMod
+namespace DayuuMod.Cards
 {
     public sealed class DayuuRealeDef : CardTemplate
     {
@@ -143,17 +142,17 @@ namespace DayuuMod
         protected override void OnEnterBattle(BattleController battle)
         {
             //base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
-            base.ReactBattleEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
+            ReactBattleEvent(Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(OnCardUsed));
             //base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleEnding, new EventSequencedReactor<GameEventArgs>(this.OnBattleEnding));
         }
         public override IEnumerable<BattleAction> OnDraw()
         {
             if (drawn == false)
             {
-                if (!GameMaster.Instance.CurrentProfile.Name.Equals("Dayuu") && !this.IsUpgraded)
+                if (!GameMaster.Instance.CurrentProfile.Name.Equals("Dayuu") && !IsUpgraded)
                 {
                     drawn = true;
-                    this.NotifyActivating();
+                    NotifyActivating();
                     yield return new ExileCardAction(this);
                 }
                 else
@@ -176,42 +175,42 @@ namespace DayuuMod
         }*/
         private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
         {
-            if ((base.Zone == CardZone.Hand) && base.Summoned && (base.Loyalty >= 7))
+            if (Zone == CardZone.Hand && Summoned && Loyalty >= 7)
             {
-                this.NotifyActivating();
-                base.Loyalty += base.UltimateCost;
-                base.UltimateUsed = true;
+                NotifyActivating();
+                Loyalty += UltimateCost;
+                UltimateUsed = true;
                 Card friend = Library.CreateCard<DayuuFriend2>();
                 friend.IsUpgraded = true;
                 friend.Summon();
                 yield return new AddCardsToHandAction(friend);
-                yield return base.DebuffAction<Weak>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
-                yield return base.DebuffAction<Fragil>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
-                yield return base.DebuffAction<Vulnerable>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Weak>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Fragil>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Vulnerable>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
                 yield return new RemoveCardAction(this);
             }
             yield break;
         }
         public override IEnumerable<BattleAction> OnTurnStartedInHand()
         {
-            return this.GetPassiveActions();
+            return GetPassiveActions();
         }
         public override IEnumerable<BattleAction> GetPassiveActions()
         {
-            if (!base.Summoned || base.Battle.BattleShouldEnd)
+            if (!Summoned || Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            base.NotifyActivating();
-            base.Loyalty += base.PassiveCost;
+            NotifyActivating();
+            Loyalty += PassiveCost;
             int num;
-            for (int i = 0; i < base.Battle.FriendPassiveTimes; i = num + 1)
+            for (int i = 0; i < Battle.FriendPassiveTimes; i = num + 1)
             {
-                if (base.Battle.BattleShouldEnd)
+                if (Battle.BattleShouldEnd)
                 {
                     yield break;
                 }
-                List<Card> list = base.Battle.RollCardsWithoutManaLimit(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.AllOnes, CardTypeWeightTable.CanBeLoot), base.Value1, (CardConfig config) => config.RelativeCards.Contains("DayuuExodia") && config.Id != base.Id).ToList<Card>();
+                List<Card> list = Battle.RollCardsWithoutManaLimit(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.AllOnes, CardTypeWeightTable.CanBeLoot), Value1, (config) => config.RelativeCards.Contains("DayuuExodia") && config.Id != Id).ToList();
                 foreach (Card card in list)
                 {
                     card.SetBaseCost(ManaGroup.Anys(card.ConfigCost.Amount));
@@ -219,25 +218,25 @@ namespace DayuuMod
                 yield return new AddCardsToHandAction(list);
                 num = i;
             }
-            if (this.Loyalty >= 7)
+            if (Loyalty >= 7)
             {
-                this.NotifyActivating();
-                base.Loyalty += base.UltimateCost;
-                base.UltimateUsed = true;
+                NotifyActivating();
+                Loyalty += UltimateCost;
+                UltimateUsed = true;
                 Card friend2 = Library.CreateCard<DayuuFriend2>();
                 friend2.IsUpgraded = true;
                 friend2.Summon();
                 yield return new AddCardsToHandAction(friend2);
-                yield return base.DebuffAction<Weak>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
-                yield return base.DebuffAction<Fragil>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
-                yield return base.DebuffAction<Vulnerable>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Weak>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Fragil>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Vulnerable>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
                 yield return new RemoveCardAction(this);
             }
             yield break;
         }
         public override IEnumerable<BattleAction> SummonActions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            this.IsEthereal = false;
+            IsEthereal = false;
             foreach (BattleAction battleAction in base.SummonActions(selector, consumingMana, precondition))
             {
                 yield return battleAction;
@@ -248,38 +247,38 @@ namespace DayuuMod
         {
             if (precondition == null || ((MiniSelectCardInteraction)precondition).SelectedCard.FriendToken == FriendToken.Active)
             {
-                base.Loyalty += base.ActiveCost;
-                List<Card> list = base.Battle.RollCardsWithoutManaLimit(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.AllOnes, CardTypeWeightTable.CanBeLoot), base.Value1, (CardConfig config) => config.RelativeCards.Contains("DayuuExodia") && config.Id != base.Id).ToList<Card>();
+                Loyalty += ActiveCost;
+                List<Card> list = Battle.RollCardsWithoutManaLimit(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.AllOnes, CardTypeWeightTable.CanBeLoot), Value1, (config) => config.RelativeCards.Contains("DayuuExodia") && config.Id != Id).ToList();
                 foreach (Card card in list)
                 {
                     card.SetBaseCost(ManaGroup.Anys(card.ConfigCost.Amount));
                     card.IsUpgraded = true;
                 }
                 yield return new AddCardsToHandAction(list);
-                yield return base.DebuffAction<Weak>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
-                yield return base.DebuffAction<Fragil>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Weak>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Fragil>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
             }
             else
             {
-                base.Loyalty += base.UltimateCost;
-                base.UltimateUsed = true;
+                Loyalty += UltimateCost;
+                UltimateUsed = true;
                 Card friend3 = Library.CreateCard<DayuuFriend2>();
                 friend3.IsUpgraded = true;
                 friend3.Summon();
                 yield return new AddCardsToHandAction(friend3);
-                yield return base.DebuffAction<Weak>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
-                yield return base.DebuffAction<Fragil>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
-                yield return base.DebuffAction<Vulnerable>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Weak>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Fragil>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Vulnerable>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
             }
             yield break;
         }
         public override IEnumerable<BattleAction> AfterUseAction()
         {
-            if (!base.Summoned || base.Battle.BattleShouldEnd)
+            if (!Summoned || Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            if (base.Loyalty <= 0 || base.UltimateUsed == true)
+            if (Loyalty <= 0 || UltimateUsed == true)
             {
                 yield return new RemoveCardAction(this);
                 yield break;

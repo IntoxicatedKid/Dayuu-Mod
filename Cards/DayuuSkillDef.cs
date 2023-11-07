@@ -25,7 +25,7 @@ using LBoL.Presentation.UI.Panels;
 using static DayuuMod.BepinexPlugin;
 using Mono.Cecil;
 
-namespace DayuuMod
+namespace DayuuMod.Cards
 {
     public sealed class DayuuSkillDef : CardTemplate
     {
@@ -119,9 +119,9 @@ namespace DayuuMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.HealAction(base.Value1);
-            yield return base.BuffAction<TempFirepower>(base.Value2, 0, 0, 0, 0.2f);
-            foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
+            yield return HealAction(Value1);
+            yield return BuffAction<TempFirepower>(Value2, 0, 0, 0, 0.2f);
+            foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
             {
                 yield return new ApplyStatusEffectAction<TempFirepower>(enemyUnit, 2, null, null, null, 0.2f, true);
             }
@@ -136,10 +136,10 @@ namespace DayuuMod
                 //{
                 //    yield return new ExileManyCardAction(negative);
                 //}
-                attack = drawnCards.Where((Card card) => (card.CardType == CardType.Attack) && !card.IsForbidden).ToList<Card>();
+                attack = drawnCards.Where((card) => card.CardType == CardType.Attack && !card.IsForbidden).ToList();
                 foreach (Card card in attack)
                 {
-                    card.SetTurnCost(base.Mana);
+                    card.SetTurnCost(Mana);
                     //yield return new UseCardAction(card, selector, consumingMana);
                 }
             }

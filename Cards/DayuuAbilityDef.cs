@@ -26,9 +26,8 @@ using Mono.Cecil;
 using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
-using DayuuMod;
 
-namespace DayuuMod
+namespace DayuuMod.Cards
 {
     public sealed class DayuuAbilityDef : CardTemplate
     {
@@ -82,9 +81,9 @@ namespace DayuuMod
                UpgradedShield: null,
                Value1: 1,
                UpgradedValue1: null,
-               Value2: 2,
-               UpgradedValue2: 4,
-               Mana: new ManaGroup() { Any = 1 },
+               Value2: 1,
+               UpgradedValue2: 2,
+               Mana: null,
                UpgradedMana: null,
                Scry: null,
                UpgradedScry: null,
@@ -101,8 +100,8 @@ namespace DayuuMod
                Keywords: Keyword.None,
                UpgradedKeywords: Keyword.None,
                EmptyDescription: false,
-               RelativeKeyword: Keyword.FriendCard,
-               UpgradedRelativeKeyword: Keyword.FriendCard,
+               RelativeKeyword: Keyword.None,
+               UpgradedRelativeKeyword: Keyword.None,
 
                RelativeEffects: new List<string>() { "DayuuFriendSe" },
                UpgradedRelativeEffects: new List<string>() { "DayuuFriendSe" },
@@ -122,7 +121,7 @@ namespace DayuuMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.BuffAction<DayuuAbilitySeDef.DayuuAbilitySe>(base.Value2, 0, 0, base.Value1, 0.2f);
+            yield return BuffAction<DayuuAbilitySeDef.DayuuAbilitySe>(Value2, 0, 0, Value1, 0.2f);
             yield break;
         }
     }
@@ -177,34 +176,27 @@ namespace DayuuMod
         {
             protected override void OnAdded(Unit unit)
             {
-                base.ReactOwnerEvent<UnitEventArgs>(base.Battle.Player.TurnStarted, new EventSequencedReactor<UnitEventArgs>(this.OnTurnStarted));
+                ReactOwnerEvent(Battle.Player.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnTurnStarted));
             }
             private IEnumerable<BattleAction> OnTurnStarted(UnitEventArgs args)
             {
-                if (!base.Battle.BattleShouldEnd)
+                if (!Battle.BattleShouldEnd)
                 {
-                    List<Card> list = base.Battle.HandZone.Where((Card card) => (card.CardType == CardType.Friend) && !(card is DayuuFriend)).ToList<Card>();
-                    List<Card> list2 = base.Battle.HandZone.Where((Card card) => card is DayuuFriend).ToList<Card>();
+                    NotifyActivating();
+                    List<Card> list = Battle.HandZone.Where((card) => card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbility || card is DayuuFriend || card is DayuuFriend2 || card.CardType == CardType.Friend).ToList();
+                    ManaGroup manaGroup = ManaGroup.Empty;
+                    for (int i = 0; i < Count; i++)
+                    {
+                        manaGroup += ManaGroup.Single(ManaColors.Colors.Sample(GameRun.BattleRng));
+                    }
                     if (list.Count > 0)
                     {
-                        base.NotifyActivating();
-                        ManaGroup manaGroup = ManaGroup.Empty;
-                        for (int i = 0; i < base.Count * list.Count; i++)
+                        for (int i = 0; i < Level * list.Count; i++)
                         {
-                            manaGroup += ManaGroup.Single(ManaColors.Colors.Sample(base.GameRun.BattleRng));
+                            manaGroup += ManaGroup.Single(ManaColors.Colors.Sample(GameRun.BattleRng));
                         }
-                        yield return new GainManaAction(manaGroup);
                     }
-                    if (list2.Count > 0)
-                    {
-                        base.NotifyActivating();
-                        ManaGroup manaGroup2 = ManaGroup.Empty;
-                        for (int i = 0; i < base.Level * list2.Count; i++)
-                        {
-                            manaGroup2 += ManaGroup.Single(ManaColors.Colors.Sample(base.GameRun.BattleRng));
-                        }
-                        yield return new GainManaAction(manaGroup2);
-                    }
+                    yield return new GainManaAction(manaGroup);
                 }
                 yield break;
             }

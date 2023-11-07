@@ -31,7 +31,7 @@ using static UnityEngine.GraphicsBuffer;
 using static DayuuMod.BepinexPlugin;
 using Mono.Cecil;
 
-namespace DayuuMod
+namespace DayuuMod.Cards
 {
     public sealed class DayuuAttackDef : CardTemplate
     {
@@ -153,44 +153,44 @@ namespace DayuuMod
         }
         public override IEnumerable<BattleAction> OnDraw()
         {
-            return this.HandReactor();
+            return HandReactor();
         }
         public override IEnumerable<BattleAction> OnDiscard(CardZone srcZone)
         {
-            if (base.Battle.BattleShouldEnd || srcZone != CardZone.Hand)
+            if (Battle.BattleShouldEnd || srcZone != CardZone.Hand)
             {
                 return null;
             }
-            return this.DiscardHandReactor();
+            return DiscardHandReactor();
         }
         public override IEnumerable<BattleAction> OnExile(CardZone srcZone)
         {
-            if (base.Battle.BattleShouldEnd || srcZone != CardZone.Hand)
+            if (Battle.BattleShouldEnd || srcZone != CardZone.Hand)
             {
                 return null;
             }
-            return this.HandReactor();
+            return HandReactor();
         }
         public override IEnumerable<BattleAction> OnMove(CardZone srcZone, CardZone dstZone)
         {
-            if (base.Battle.BattleShouldEnd || (srcZone == CardZone.Draw && dstZone == CardZone.Discard) || (srcZone == CardZone.Discard && dstZone == CardZone.Draw) || (srcZone == CardZone.Exile && dstZone == CardZone.Draw) || (srcZone == CardZone.Exile && dstZone == CardZone.Discard))
+            if (Battle.BattleShouldEnd || srcZone == CardZone.Draw && dstZone == CardZone.Discard || srcZone == CardZone.Discard && dstZone == CardZone.Draw || srcZone == CardZone.Exile && dstZone == CardZone.Draw || srcZone == CardZone.Exile && dstZone == CardZone.Discard)
             {
                 return null;
             }
-            return this.HandReactor();
+            return HandReactor();
         }
         protected override void OnEnterBattle(BattleController battle)
         {
-            if (base.Zone == CardZone.Hand)
+            if (Zone == CardZone.Hand)
             {
-                base.React(new LazySequencedReactor(this.AddToHandReactor));
+                React(new LazySequencedReactor(AddToHandReactor));
             }
         }
         private IEnumerable<BattleAction> AddToHandReactor()
         {
-            base.NotifyActivating();
+            NotifyActivating();
             List<DamageAction> list = new List<DamageAction>();
-            foreach (BattleAction action in this.HandReactor())
+            foreach (BattleAction action in HandReactor())
             {
                 yield return action;
                 DamageAction damageAction = action as DamageAction;
@@ -199,7 +199,7 @@ namespace DayuuMod
                     list.Add(damageAction);
                 }
             }
-            if (list.NotEmpty<DamageAction>())
+            if (list.NotEmpty())
             {
                 yield return new StatisticalTotalDamageAction(list);
             }
@@ -207,42 +207,42 @@ namespace DayuuMod
         }
         private IEnumerable<BattleAction> HandReactor()
         {
-            if (base.Battle.BattleShouldEnd)
+            if (Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            EnemyUnit[] array = base.Battle.EnemyGroup.Alives.SampleManyOrAll(1, base.GameRun.BattleRng);
+            EnemyUnit[] array = Battle.EnemyGroup.Alives.SampleManyOrAll(1, GameRun.BattleRng);
             foreach (EnemyUnit target in array)
             {
                 if (target != null && target.IsAlive)
                 {
-                    yield return base.AttackAction(target);
+                    yield return AttackAction(target);
                 }
             }
-            if (base.Battle.Player.HasStatusEffect<EvilTuiZhiSe>())
+            if (Battle.Player.HasStatusEffect<EvilTuiZhiSe>())
             {
-                EvilTuiZhiSe statusEffect = base.Battle.Player.GetStatusEffect<EvilTuiZhiSe>();
+                EvilTuiZhiSe statusEffect = Battle.Player.GetStatusEffect<EvilTuiZhiSe>();
                 yield return statusEffect.TakeEffect();
             }
             yield break;
         }
         private IEnumerable<BattleAction> DiscardHandReactor()
         {
-            if (base.Battle.BattleShouldEnd)
+            if (Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            EnemyUnit[] array = base.Battle.EnemyGroup.Alives.SampleManyOrAll(1, base.GameRun.BattleRng);
+            EnemyUnit[] array = Battle.EnemyGroup.Alives.SampleManyOrAll(1, GameRun.BattleRng);
             foreach (EnemyUnit target in array)
             {
                 if (target != null && target.IsAlive)
                 {
-                    yield return base.AttackAction(target);
+                    yield return AttackAction(target);
                 }
             }
-            if (base.Battle.Player.HasStatusEffect<EvilTuiZhiSe>())
+            if (Battle.Player.HasStatusEffect<EvilTuiZhiSe>())
             {
-                EvilTuiZhiSe statusEffect = base.Battle.Player.GetStatusEffect<EvilTuiZhiSe>();
+                EvilTuiZhiSe statusEffect = Battle.Player.GetStatusEffect<EvilTuiZhiSe>();
                 yield return statusEffect.TakeEffect();
             }
             yield return new MoveCardToDrawZoneAction(this, DrawZoneTarget.Top);
@@ -250,7 +250,7 @@ namespace DayuuMod
         }
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.AttackAction(base.Battle.RandomAliveEnemy);
+            yield return AttackAction(Battle.RandomAliveEnemy);
             yield break;
         }
         /*public override IEnumerable<BattleAction> AfterUseAction()

@@ -33,7 +33,7 @@ using static DayuuMod.BepinexPlugin;
 using LBoL.EntityLib.Cards.Character.Marisa;
 using Mono.Cecil;
 
-namespace DayuuMod
+namespace DayuuMod.Cards
 {
     public sealed class DayuuExodiaDef : CardTemplate
     {
@@ -127,80 +127,80 @@ namespace DayuuMod
     {
         public override IEnumerable<BattleAction> OnDiscard(CardZone srcZone)
         {
-            if (base.Battle.BattleShouldEnd)
+            if (Battle.BattleShouldEnd)
             {
                 return null;
             }
-            return this.GetPassiveActions();
+            return GetPassiveActions();
         }
         public override IEnumerable<BattleAction> OnExile(CardZone srcZone)
         {
-            if (base.Battle.BattleShouldEnd)
+            if (Battle.BattleShouldEnd)
             {
                 return null;
             }
-            return this.GetPassiveActions();
+            return GetPassiveActions();
         }
         public override IEnumerable<BattleAction> OnMove(CardZone srcZone, CardZone dstZone)
         {
-            if (base.Battle.BattleShouldEnd)
+            if (Battle.BattleShouldEnd)
             {
                 return null;
             }
-            return this.GetPassiveActions();
+            return GetPassiveActions();
         }
         protected override void OnEnterBattle(BattleController battle)
         {
-            if (base.Zone == CardZone.Hand)
+            if (Zone == CardZone.Hand)
             {
-                base.React(new LazySequencedReactor(this.AddToHandReactor));
+                React(new LazySequencedReactor(AddToHandReactor));
             }
         }
         private IEnumerable<BattleAction> AddToHandReactor()
         {
-            yield return PerformAction.Effect(base.Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-            yield return PerformAction.Effect(base.Battle.Player, "Wave1s", 0.5f, "", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-            yield return PerformAction.Effect(base.Battle.Player, "Wave1s", 1f, "", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-            yield return PerformAction.Effect(base.Battle.Player, "JunkoNightmare", 0f, "JunkoNightmare", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-            yield return PerformAction.Effect(base.Battle.Player, "JunkoNightmare", 0.5f, "", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-            yield return PerformAction.Effect(base.Battle.Player, "JunkoNightmare", 1f, "", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-            yield return PerformAction.Effect(base.Battle.Player, "RenzhenAura", 1f, "RenzhenAura", 1f, PerformAction.EffectBehavior.Add, 0f);
-            yield return base.BuffAction<DayuuExodiaSeDef.DayuuExodiaSe>(0, 0, 0, 0, 0f);
+            yield return PerformAction.Effect(Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+            yield return PerformAction.Effect(Battle.Player, "Wave1s", 0.5f, "", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+            yield return PerformAction.Effect(Battle.Player, "Wave1s", 1f, "", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+            yield return PerformAction.Effect(Battle.Player, "JunkoNightmare", 0f, "JunkoNightmare", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+            yield return PerformAction.Effect(Battle.Player, "JunkoNightmare", 0.5f, "", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+            yield return PerformAction.Effect(Battle.Player, "JunkoNightmare", 1f, "", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+            yield return PerformAction.Effect(Battle.Player, "RenzhenAura", 1f, "RenzhenAura", 1f, PerformAction.EffectBehavior.Add, 0f);
+            yield return BuffAction<DayuuExodiaSeDef.DayuuExodiaSe>(0, 0, 0, 0, 0f);
             yield break;
         }
         public override IEnumerable<BattleAction> OnTurnEndingInHand()
         {
-            return this.GetPassiveActions();
+            return GetPassiveActions();
         }
         public override IEnumerable<BattleAction> GetPassiveActions()
         {
-            if (!base.Summoned || base.Battle.BattleShouldEnd)
+            if (!Summoned || Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            base.NotifyActivating();
-            base.Loyalty += base.PassiveCost;
+            NotifyActivating();
+            Loyalty += PassiveCost;
             int num;
-            for (int i = 0; i < base.Battle.FriendPassiveTimes; i = num + 1)
+            for (int i = 0; i < Battle.FriendPassiveTimes; i = num + 1)
             {
-                if (base.Battle.BattleShouldEnd)
+                if (Battle.BattleShouldEnd)
                 {
                     yield break;
                 }
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 2.6f);
-                foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 2.6f);
+                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
                 {
                     enemyUnit.ClearBlockShield();
                     enemyUnit.ClearStatusEffects();
                 }
-                yield return new DamageAction(base.Battle.Player, base.Battle.AllAliveEnemies, DamageInfo.HpLose(base.Value1), "Instant", GunType.Single);
+                yield return new DamageAction(Battle.Player, Battle.AllAliveEnemies, DamageInfo.HpLose(Value1), "Instant", GunType.Single);
                 num = i;
             }
             yield break;
@@ -218,31 +218,31 @@ namespace DayuuMod
         {
             if (precondition == null || ((MiniSelectCardInteraction)precondition).SelectedCard.FriendToken == FriendToken.Active)
             {
-                base.Loyalty += base.ActiveCost;
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 0.01f);
-                yield return PerformAction.Gun(base.Battle.Player, base.Battle.AllAliveEnemies.FirstOrDefault<EnemyUnit>(), "究极火花B", 2.6f);
-                foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
+                Loyalty += ActiveCost;
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 0.01f);
+                yield return PerformAction.Gun(Battle.Player, Battle.AllAliveEnemies.FirstOrDefault(), "究极火花B", 2.6f);
+                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
                 {
                     enemyUnit.ClearBlockShield();
                     enemyUnit.ClearStatusEffects();
                 }
-                yield return new DamageAction(base.Battle.Player, base.Battle.AllAliveEnemies, DamageInfo.Reaction(base.Value1), "Instant", GunType.Single);
+                yield return new DamageAction(Battle.Player, Battle.AllAliveEnemies, DamageInfo.Reaction(Value1), "Instant", GunType.Single);
             }
             yield break;
         }
         public override IEnumerable<BattleAction> AfterUseAction()
         {
-            if (!base.Summoned || base.Battle.BattleShouldEnd)
+            if (!Summoned || Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            if (base.Loyalty <= 0 || base.UltimateUsed == true)
+            if (Loyalty <= 0 || UltimateUsed == true)
             {
                 yield return new RemoveCardAction(this);
                 yield break;
@@ -303,14 +303,14 @@ namespace DayuuMod
         {
             protected override void OnAdded(Unit unit)
             {
-                base.HandleOwnerEvent<DamageEventArgs>(unit.DamageTaking, new GameEventHandler<DamageEventArgs>(this.OnDamageTaking));
+                HandleOwnerEvent(unit.DamageTaking, new GameEventHandler<DamageEventArgs>(OnDamageTaking));
             }
             private void OnDamageTaking(DamageEventArgs args)
             {
                 int num = args.DamageInfo.Damage.RoundToInt();
                 if (num > 0)
                 {
-                    base.NotifyActivating();
+                    NotifyActivating();
                     args.DamageInfo = args.DamageInfo.ReduceActualDamageBy(num);
                     args.AddModifier(this);
                 }

@@ -298,7 +298,13 @@
         </Reference>
         <Reference Include="UniTask">
             <HintPath>$(GameFolder)\LBoL_Data\Managed\UniTask.dll</HintPath>
-        </Reference>        
+        </Reference>
+        <Reference Include="spine-csharp">
+            <HintPath>$(GameFolder)\LBoL_Data\Managed\spine-csharp.dll</HintPath>
+        </Reference>
+        <Reference Include="spine-unity">
+            <HintPath>$(GameFolder)\LBoL_Data\Managed\spine-unity.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
 
@@ -325,21 +331,27 @@
       <None Remove="Resources\DayuuFriendMIO.png" />
       <None Remove="Resources\DayuuReale.png" />
       <None Remove="Resources\DayuuRealeCruezor.png" />
+      <None Remove="Resources\DayuuReimuCirno.png" />
+      <None Remove="Resources\DayuuReimuKoishi.png" />
+      <None Remove="Resources\DayuuReimuMarisa.png" />
+      <None Remove="Resources\DayuuReimuMarisafuente.png" />
+      <None Remove="Resources\DayuuReimuReimu.png" />
+      <None Remove="Resources\DayuuReimuSakuya.png" />
       <None Remove="Resources\DayuuSkill.png" />
       <None Remove="Resources\DayuuSkillMIO.png" />
       <None Remove="Resources\DayuuSmallSparrow.png" />
+      <None Remove="Resources\EnemyUnitsEn.yaml" />
       <None Remove="Resources\ExhibitsEn.yaml" />
+      <None Remove="Resources\HexagonSe.png" />
       <None Remove="Resources\StatusEffectsEn.yaml" />
-    </ItemGroup>
-
-
-    <ItemGroup>
-      <Folder Include="DirResources\" />
+      <None Remove="Resources\Th18BlankCard.png" />
+      <None Remove="Resources\UltimateSkillsEn.yaml" />
+      <None Remove="Resources\UnitModelsEn.yaml" />
     </ItemGroup>
 
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;$(BepInExFolder)\scripts&quot;&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;echo $(AssemblyName)&#xD;&#xA;IF exist &quot;$(BepInExFolder)\plugins\$(AssemblyName)&quot; goto skipDir&#xD;&#xA;mkdir &quot;$(BepInExFolder)\plugins\$(AssemblyName)&quot;&#xD;&#xA;:skipDir&#xD;&#xA;copy /Y &quot;$(ProjectDir)DirResources\*&quot; &quot;$(BepInExFolder)\plugins\$(AssemblyName)&quot; &#xD;&#xA;powershell -command &quot;Compress-Archive -Path '$(TargetPath)', '$(ProjectDir)DirResources\*', '$(ProjectDir)manifest.json', '$(ProjectDir)icon.png', '$(ProjectDir)README.md', '$(ProjectDir)CHANGELOG.md'   -DestinationPath  '$(ProjectDir)$(AssemblyName)-thunderstore.zip' -Force&quot;" />	
+        <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;IF exist &quot;$(BepInExFolder)\scripts\$(AssemblyName)&quot; goto skipDir&#xD;&#xA;mkdir &quot;$(BepInExFolder)\scripts\$(AssemblyName)&quot;&#xD;&#xA;:skipDir&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;$(BepInExFolder)\scripts\$(AssemblyName)&quot;&#xD;&#xA;xcopy /Y /E &quot;$(ProjectDir)DirResources\*&quot; &quot;$(BepInExFolder)\scripts\$(AssemblyName)&quot; &#xD;&#xA;powershell -command &quot;Compress-Archive -Path '$(TargetPath)', '$(ProjectDir)DirResources\*', '$(ProjectDir)manifest.json', '$(ProjectDir)icon.png', '$(ProjectDir)README.md', '$(ProjectDir)CHANGELOG.md'   -DestinationPath  '$(ProjectDir)$(AssemblyName)-thunderstore.zip' -Force&quot;" />
     </Target>
 
 
